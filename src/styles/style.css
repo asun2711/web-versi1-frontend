@@ -1,0 +1,103 @@
+/* global.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ---------------- Variabel Global ---------------- */
+:root {
+  --font-family: 'Poppins', sans-serif;
+  --font-size: 16px;
+  --h1-size: 32px;
+  --h2-size: 28px;
+  --h3-size: 24px;
+  --h4-size: 20px;
+  --bg-color: #fff;
+  --text-color: #000;
+  --primary-color: #03ce7d;
+  --primary-hover: #029e56;
+}
+
+/* ---------------- Reset Dasar ---------------- */
+* {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  overflow-x: hidden; /* cegah scroll horizontal */
+}
+
+/* ---------------- Heading ---------------- */
+h1 { font-size: var(--h1-size); font-weight: 700; }
+h2 { font-size: var(--h2-size); font-weight: 600; }
+h3 { font-size: var(--h3-size); font-weight: 600; }
+h4 { font-size: var(--h4-size); font-weight: 500; }
+
+/* ---------------- Link & List ---------------- */
+a {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, li {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  list-style: none;
+}
+
+/* ---------------- Container Full Width ---------------- */
+.container {
+  width: 100vw;       /* menempel ke viewport */
+  margin: 0;
+  padding: 0;
+}
+
+.container-5 {
+  width: 100%;
+  padding: 0 5%;      /* konten tetap 5% kiri-kanan */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ---------------- Footer ---------------- */
+.footer {
+  width: 100vw;
+  padding: 2rem 0;
+  background-color: #f8f8f8;
+}
+
+/* ---------------- Map Container ---------------- */
+.footer-map {
+  width: 100vw;
+  height: 300px;      /* sesuaikan tinggi map */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.footer-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;     /* hilangkan inline spacing */
+}
+
+/* ---------------- Button Global ---------------- */
+button {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}

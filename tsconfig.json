@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    // Base URL untuk path alias
+    "baseUrl": ".",
+    
+    // Alias @ mengarah ke folder src
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}

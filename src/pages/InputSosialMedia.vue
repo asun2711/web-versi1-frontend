@@ -1,0 +1,353 @@
+<template>
+  <div class="input-sosialmedia-page">
+    <h2>Input Data Sosial Media</h2>
+    <form @submit.prevent="handleSubmit">
+      <div>
+        <label for="namasosialmedia">Nama Sosial Media:</label>
+        <textarea id="namasosialmedia" v-model="form.namasosialmedia"></textarea>
+      </div>
+
+      <div>
+        <label for="username">Username / Handle:</label>
+        <input id="username" v-model="form.username" placeholder="@username" />
+      </div>
+
+      <div>
+        <label for="link">Link / URL:</label>
+        <input id="link" type="url" v-model="form.link" required />
+      </div>
+
+      <div>
+        <label for="iconsosialmedia">Icon / Gambar Sosial Media :</label>
+        <input type="file" id="iconsosialmedia" @change="handleFileUpload" accept="image/*" />
+        <div v-if="logoPreview" class="preview-container">
+          <img :src="logoPreview" alt="Preview Icon" />
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button type="submit" class="btn-primary">{{ isEditing ? 'Update' : 'Simpan' }}</button>
+        <button v-if="isEditing" type="button" @click="cancelEdit" class="btn-cancel">Batal</button>
+      </div>
+    </form>
+
+    <h3 style="margin-top: 80px;">Data Sosial Media</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama Sosial Media</th>
+            <th>Username</th>
+            <th>Link</th>
+            <th>Icon Sosial Media</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in sosialmediaList" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.namasosialmedia }}</td>
+            <td>{{ item.username }}</td>
+            <td><a :href="item.link" target="_blank">{{ item.link }}</a></td>
+            <td>
+              <img v-if="item.iconsosialmedia" :src="`/uploads/sosialmedia/${item.iconsosialmedia}`" />
+            </td>
+            <td>
+              <button @click="editSosialMedia(item)">Edit</button>
+              <button @click="deleteSosialMedia(item.id)">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { reactive, ref, onMounted } from 'vue';
+import { sosialMediaApi } from '@/services/api';
+import type { SosialMedia } from '@/services/api';
+
+interface SosialMediaForm {
+  id: number | null;
+  namasosialmedia: string;
+  username: string;
+  link: string;
+}
+
+export default {
+  name: 'InputSosialMedia',
+  setup() {
+    const form = reactive<SosialMediaForm>({
+      id: null,
+      namasosialmedia: '',
+      username: '',
+      link: '',
+    });
+
+    const iconsosialmedia = ref<File | null>(null);
+    const logoPreview = ref<string | null>(null);
+    const sosialmediaList = ref<SosialMedia[]>([]);
+    const isEditing = ref(false);
+
+    const fetchSosialMedia = async () => {
+      try {
+        sosialmediaList.value = await sosialMediaApi.getAll();
+      } catch (error: any) {
+        alert('Gagal mengambil data sosial media: ' + error.message);
+      }
+    };
+    onMounted(fetchSosialMedia);
+
+    const handleFileUpload = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      if (!target.files || !target.files[0]) {
+        logoPreview.value = null;
+        return;
+      }
+      const file = target.files[0];
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Format file salah! Hanya jpg, jpeg, png, dan gif.');
+        iconsosialmedia.value = null;
+        logoPreview.value = null;
+        target.value = '';
+        return;
+      }
+      iconsosialmedia.value = file;
+      logoPreview.value = URL.createObjectURL(file);
+    };
+
+    const resetForm = () => {
+      form.id = null;
+      form.namasosialmedia = '';
+      form.username = '';
+      form.link = '';
+      iconsosialmedia.value = null;
+      if (logoPreview.value) URL.revokeObjectURL(logoPreview.value);
+      logoPreview.value = null;
+      const inputFile = document.getElementById('iconsosialmedia') as HTMLInputElement | null;
+      if (inputFile) inputFile.value = '';
+      isEditing.value = false;
+    };
+
+    const cancelEdit = () => resetForm();
+
+    const handleSubmit = async () => {
+      if (!window.confirm('Apakah data sudah benar? Yakin ingin menyimpan?')) return;
+
+      const formData = new FormData();
+      formData.append('namasosialmedia', form.namasosialmedia);
+      formData.append('username', form.username);
+      formData.append('link', form.link);
+      if (iconsosialmedia.value) formData.append('iconsosialmedia', iconsosialmedia.value);
+
+      try {
+        if (isEditing.value && form.id !== null) {
+          await sosialMediaApi.update(form.id, formData);
+          alert('Data berhasil diupdate.');
+        } else {
+          await sosialMediaApi.create(formData);
+          alert('Data berhasil disimpan.');
+        }
+        resetForm();
+        fetchSosialMedia();
+      } catch (error: any) {
+        alert('Gagal menyimpan data: ' + error.message);
+      }
+    };
+
+    const editSosialMedia = (item: SosialMedia) => {
+      Object.assign(form, item);
+      logoPreview.value = item.iconsosialmedia ? `/uploads/sosialmedia/${item.iconsosialmedia}` : null;
+      iconsosialmedia.value = null;
+      isEditing.value = true;
+      const inputFile = document.getElementById('iconsosialmedia') as HTMLInputElement | null;
+      if (inputFile) inputFile.value = '';
+    };
+
+    const deleteSosialMedia = async (id: number) => {
+      if (!window.confirm('Yakin ingin menghapus data ini?')) return;
+      try {
+        await sosialMediaApi.delete(id);
+        alert('Data berhasil dihapus.');
+        fetchSosialMedia();
+      } catch (error: any) {
+        alert('Gagal menghapus data: ' + error.message);
+      }
+    };
+
+    return {
+      form,
+      iconsosialmedia,
+      logoPreview,
+      sosialmediaList,
+      isEditing,
+      handleFileUpload,
+      handleSubmit,
+      editSosialMedia,
+      deleteSosialMedia,
+      cancelEdit,
+    };
+  },
+};
+</script>
+
+<style scoped>
+.input-sosialmedia-page {
+  padding: 1rem;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary,
+.btn-edit {
+  background-color: #03ce7d;
+}
+
+.btn-primary:hover,
+.btn-edit:hover {
+  background-color: #029e56;
+}
+
+.btn-delete {
+  background-color: #f44336;
+}
+
+.btn-delete:hover {
+  background-color: #d32f2f;
+}
+
+.btn-cancel {
+  background-color: #9e9e9e;
+}
+
+.btn-cancel:hover {
+  background-color: #757575;
+}
+
+.preview-container img {
+  max-width: 200px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 2rem;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th,
+td {
+  padding: 0.75rem 0.5rem;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.id-cell,
+.nama-cell,
+.gelar-cell,
+.jabatan-cell,
+.masa-cell {
+  max-width: 180px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.gambar-cell {
+  width: 100px;
+  text-align: center;
+}
+
+.gambar-cell img {
+  max-width: 350px;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.aksi-cell {
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.action-buttons button {
+  padding: 0.25rem 0.5rem;
+  font-size: 12px;
+  margin-right: 0;
+  flex: 1;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+  .input-sosialmedia-page {
+    padding: 0.5rem;
+  }
+  th,
+  td {
+    padding: 0.5rem 0.25rem;
+    font-size: 13px;
+  }
+  .id-cell,
+  .nama-cell,
+  .gelar-cell,
+  .jabatan-cell,
+  .masa-cell {
+    max-width: 120px;
+  }
+}
+</style>
