@@ -51,7 +51,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item.judulpengumuman }}</td>
             <td>{{ item.isipengumuman }}</td>
-            <td>
+            <td class="gambar-cell">
               <img v-if="item.gambarpengumuman" :src="`${API_URL}/uploads/pengumuman/${item.gambarpengumuman}`" />
             </td>
             <td>{{ formatTanggal(item.tanggalpengumuman) }}</td>
@@ -313,6 +313,11 @@ td {
   text-align: left;
   font-size: 14px;
   vertical-align: top;
+}
+
+.gambar-cell {
+  width: 100px;
+  text-align: center;
 }
 
 .gambar-cell img {
