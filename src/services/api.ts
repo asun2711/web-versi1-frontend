@@ -3,7 +3,7 @@ import axios, { Axios } from 'axios';
 
 // ====================== AXIOS INSTANCE ======================
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_UR;
 
 let api: Axios;
 if (!BASE_URL) {
