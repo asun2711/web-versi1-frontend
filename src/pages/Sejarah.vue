@@ -40,9 +40,7 @@
 
 <script lang="ts">
 import { ref, onMounted } from 'vue';
-// Type-only import untuk type safety
 import type { Sejarah } from '@/services/api';
-// API import dari api.ts
 import { sejarahApi } from '@/services/api';
 
 export default {
@@ -53,7 +51,6 @@ export default {
 
     const fetchSejarah = async () => {
       try {
-        // pakai api.ts
         sejarahList.value = await sejarahApi.getAll();
       } catch (error: any) {
         console.error('Gagal mengambil data sejarah:', error);
@@ -62,7 +59,10 @@ export default {
 
     onMounted(fetchSejarah);
 
-    return { sejarahList, API_URL, };
+    return {
+      sejarahList,
+      API_URL,
+    };
   },
 };
 </script>
