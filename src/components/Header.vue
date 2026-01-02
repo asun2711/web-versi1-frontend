@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted } from "vue";
-import { perusahaanApi } from "@/services/api"; // import dari api.ts
+import { perusahaanApi } from "@/services/api";
 import type { Perusahaan } from "@/services/api";
 
 interface SubMenuItem {
@@ -52,6 +52,8 @@ export default {
   name: "Header",
   setup() {
     const logoHeader = ref<string>("");
+
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const dropdowns = reactive<Record<string, DropdownItem>>({
       profil: {
@@ -97,17 +99,17 @@ export default {
 
     const fetchLogo = async () => {
       try {
-        const perusahaanList: Perusahaan[] = await perusahaanApi.getAll(); // pakai api.ts
+        const perusahaanList: Perusahaan[] = await perusahaanApi.getAll();
         const firstPerusahaan = perusahaanList[0];
 
         if (firstPerusahaan?.logoperusahaan) {
-          logoHeader.value = `/uploads/perusahaan/${firstPerusahaan.logoperusahaan}`;
+          logoHeader.value = `${API_URL}/uploads/perusahaan/${firstPerusahaan.logoperusahaan}`;
         } else {
-          logoHeader.value = ''; // default kalau tidak ada logo
+          logoHeader.value = "";
         }
       } catch (error) {
         console.error("Gagal mengambil logo:", error);
-        logoHeader.value = ''; // tetap assign default kalau error
+        logoHeader.value = "";
       }
     };
 
@@ -122,7 +124,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .header {

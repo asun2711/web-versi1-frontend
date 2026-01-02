@@ -25,7 +25,9 @@
         <li class="notification-icon" style="position: relative;">
           <a href="#" class="menu-icon icon-hover" @click.prevent="toggleNotification">
             🔔
-            <span v-if="unreadMessages > 0" class="notification-badge">{{ unreadMessages }}</span>
+            <span v-if="unreadMessages > 0" class="notification-badge">
+              {{ unreadMessages }}
+            </span>
           </a>
           <ul v-if="notificationOpen" class="submenu submenu-left" @click.stop>
             <li v-if="unreadMessages === 0">Tidak ada pemberitahuan baru</li>
@@ -47,10 +49,16 @@
           <a href="#" class="menu-icon icon-hover" @click.prevent="toggleLogout">⏻</a>
           <ul v-if="logoutOpen" class="submenu submenu-left logout-menu" @click.stop>
             <li class="avatar-container">
-              <img src="https://i.pravatar.cc/100" alt="Avatar" class="avatar" />
+              <img
+                src="https://i.pravatar.cc/100"
+                alt="Avatar"
+                class="avatar"
+              />
             </li>
             <li>
-              <button class="logout-button" @click="handleLogout">Logout</button>
+              <button class="logout-button" @click="handleLogout">
+                Logout
+              </button>
             </li>
           </ul>
         </li>
@@ -62,7 +70,7 @@
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-import { perusahaanApi, contactApi } from "@/services/api"; // import api.ts
+import { perusahaanApi, contactApi } from "@/services/api";
 import type { Perusahaan } from "@/services/api";
 
 export default {
@@ -72,25 +80,29 @@ export default {
 
   setup() {
     const router = useRouter();
+
     const settingsOpen = ref(false);
     const logoutOpen = ref(false);
     const notificationOpen = ref(false);
     const unreadMessages = ref(0);
     const logoHeader = ref<string>("");
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     // ================= FETCH LOGO =================
     const fetchLogo = async () => {
       try {
         const perusahaanList: Perusahaan[] = await perusahaanApi.getAll();
         const firstPerusahaan = perusahaanList[0];
+
         if (firstPerusahaan?.logoperusahaan) {
-          logoHeader.value = `/uploads/perusahaan/${firstPerusahaan.logoperusahaan}`;
+          logoHeader.value = `${API_URL}/uploads/perusahaan/${firstPerusahaan.logoperusahaan}`;
         } else {
-          logoHeader.value = '';
+          logoHeader.value = "";
         }
       } catch (error) {
         console.error("Gagal mengambil logo:", error);
-        logoHeader.value = '';
+        logoHeader.value = "";
       }
     };
 
@@ -201,6 +213,7 @@ export default {
   user-select: none;
   transition: color 0.3s, transform 0.3s;
 }
+
 .icon-hover:hover {
   color: #03ce7d;
   transform: scale(1.2);
@@ -214,10 +227,12 @@ export default {
   padding: 0rem;
   transition: margin-left 0.3s ease;
 }
+
 .logo img {
   height: 60px;
   width: auto;
 }
+
 .logo-shifted {
   margin-left: -15px;
 }
@@ -236,17 +251,21 @@ export default {
   min-width: 150px;
   z-index: 1000;
 }
+
 .submenu li {
   padding: 0.5rem 1rem;
 }
+
 .submenu li:hover {
   background-color: #03ce7d;
 }
+
 .submenu li a {
   color: #000;
   text-decoration: none;
   display: block;
 }
+
 .submenu li a:hover {
   color: white;
 }
@@ -256,9 +275,11 @@ export default {
   text-align: center;
   padding: 1rem;
 }
+
 .avatar-container {
   padding: 0.5rem 0;
 }
+
 .avatar {
   width: 72px;
   height: 72px;
@@ -266,6 +287,7 @@ export default {
   object-fit: cover;
   border: 2px solid #03ce7d;
 }
+
 .logout-button {
   background-color: #03ce7d;
   border: none;
@@ -278,6 +300,7 @@ export default {
   width: 100%;
   margin-top: 0.5rem;
 }
+
 .logout-button:hover {
   background-color: #029e56;
 }
