@@ -22,7 +22,7 @@
             />
           </div>
           <h3 class="card-title">
-            {{ item.namadireksi }}{{ item.gelardireksi ? ', ' + item.gelardireksi : '' }}
+            {{ item.namadireksi }}{{ item.gelardireksi ? '' + item.gelardireksi : '' }}
           </h3>
           <span class="card-badge">{{ item.jabatandireksi }}</span>
           <p class="masa-jabatan">{{ item.masajabatandireksi }}</p>
