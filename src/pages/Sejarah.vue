@@ -16,7 +16,7 @@
         <div class="image-side">
           <img
             v-if="item.gambarsejarah"
-            :src="`/uploads/sejarah/${item.gambarsejarah}`"
+            :src="`${API_URL}/uploads/sejarah/${item.gambarsejarah}`"
             :alt="item.judulsejarah"
           />
         </div>
@@ -49,6 +49,7 @@ export default {
   name: 'Sejarah',
   setup() {
     const sejarahList = ref<Sejarah[]>([]);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const fetchSejarah = async () => {
       try {
@@ -61,7 +62,7 @@ export default {
 
     onMounted(fetchSejarah);
 
-    return { sejarahList };
+    return { sejarahList, API_URL, };
   },
 };
 </script>
