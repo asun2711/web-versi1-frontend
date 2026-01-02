@@ -51,7 +51,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item.namadireksi }}</td>
             <td>{{ item.gelardireksi }}</td>
-            <td>
+            <td class="gambar-cell">
               <img v-if="item.gambardireksi" :src="`${API_URL}/uploads/struktur/${item.gambardireksi}`" />
             </td>
             <td>{{ item.jabatandireksi }}</td>

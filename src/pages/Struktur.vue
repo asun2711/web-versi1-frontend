@@ -50,7 +50,8 @@ export default {
 
     const fetchStruktur = async () => {
       try {
-        strukturList.value = await strukturApi.getAll();
+        const list = await strukturApi.getAll(); // pakai api.ts
+        strukturList.value = list;
       } catch (err) {
         console.error('Gagal fetch data:', err);
         strukturList.value = [];
@@ -87,7 +88,6 @@ export default {
   width: 100vw;
   color: #fff;
 }
-
 .section-content {
   margin: 0 auto;
   text-align: left;
@@ -99,7 +99,6 @@ export default {
   padding: 50px 5%;
   box-sizing: border-box;
 }
-
 .card-wrapper {
   display: flex;
   justify-content: center;
@@ -113,37 +112,37 @@ export default {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   padding: 25px;
   flex: 1 1 31.3%;
-  max-width: 32.3%;
   text-align: center;
   transition: all 0.3s ease;
+  max-width: 32.3%;
   position: relative;
   overflow: hidden;
 }
 
 .card-img-wrapper {
   width: 100%;
-  height: 300px;
+  height: 300px; 
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #ffffff; 
   border-radius: 12px;
   margin-bottom: 15px;
   cursor: pointer;
 }
 
-/* 🔑 PERUBAHAN UTAMA DI SINI */
 .card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
   border-radius: 12px;
 }
 
 .card-title {
-  font-size: 1.75em;
+  font-size: 1.75em; 
   font-weight: 600;
   color: #333;
+  text-align: center;
   margin-bottom: 10px;
 }
 
@@ -171,6 +170,8 @@ export default {
   height: 4px;
   width: 0;
   background-color: #19ba7a;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   transition: width 0.4s ease;
 }
 
@@ -185,8 +186,11 @@ export default {
 
 .image-modal {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -197,14 +201,15 @@ export default {
   max-width: 90%;
   max-height: 90%;
   border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .modal-close {
   position: absolute;
   top: 20px;
   right: 30px;
-  font-size: 2rem;
   color: #fff;
+  font-size: 2rem;
   cursor: pointer;
 }
 
