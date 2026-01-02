@@ -52,7 +52,7 @@
             <td>{{ item.judulpengumuman }}</td>
             <td>{{ item.isipengumuman }}</td>
             <td>
-              <img v-if="item.gambarpengumuman" :src="`/uploads/pengumuman/${item.gambarpengumuman}`" />
+              <img v-if="item.gambarpengumuman" :src="`${API_URL}/uploads/pengumuman/${item.gambarpengumuman}`" />
             </td>
             <td>{{ formatTanggal(item.tanggalpengumuman) }}</td>
             <td>{{ item.namauploader }}</td>
@@ -191,7 +191,7 @@ export default {
         tanggalpengumuman: item.tanggalpengumuman ? item.tanggalpengumuman.slice(0, 16) : '',
         namauploader: item.namauploader,
       });
-      logoPreview.value = item.gambarpengumuman ? `/uploads/pengumuman/${item.gambarpengumuman}` : null;
+      logoPreview.value = item.gambarpengumuman ? `${API_URL}/uploads/pengumuman/${item.gambarpengumuman}` : null;
       gambarpengumuman.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarpengumuman') as HTMLInputElement | null;
@@ -211,6 +211,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarpengumuman,
@@ -223,6 +225,7 @@ export default {
       deletePengumuman,
       cancelEdit,
       formatTanggal,
+      API_URL,
     };
   },
 };

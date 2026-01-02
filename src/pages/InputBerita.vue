@@ -52,7 +52,7 @@
             <td class="judul-cell">{{ item.judulberita }}</td>
             <td class="isi-cell">{{ item.isiberita }}</td>
             <td class="gambar-cell">
-              <img v-if="item.gambarberita" :src="`/uploads/berita/${item.gambarberita}`" alt="Gambar" />
+              <img v-if="item.gambarberita" :src="`${API_URL}/uploads/berita/${item.gambarberita}`" alt="Gambar" />
             </td>
             <td class="tanggal-cell">{{ formatTanggal(item.tanggalberita) }}</td>
             <td class="uploader-cell">{{ item.namauploader }}</td>
@@ -191,7 +191,7 @@ export default {
         tanggalberita: item.tanggalberita ? item.tanggalberita.slice(0, 16) : '',
         namauploader: item.namauploader,
       });
-      logoPreview.value = item.gambarberita ? `/uploads/berita/${item.gambarberita}` : null;
+      logoPreview.value = item.gambarberita ? `${API_URL}/uploads/berita/${item.gambarberita}` : null;
       gambarberita.value = null;
       isEditing.value = true;
 
@@ -211,6 +211,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarberita,
@@ -223,6 +225,7 @@ export default {
       deleteBerita,
       cancelEdit,
       formatTanggal,
+      API_URL,
     };
   },
 };

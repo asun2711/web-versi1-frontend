@@ -222,7 +222,7 @@ export default defineComponent({
     const titleText = computed(() => detail.value?.namamcu || '');
     const hargaText = computed(() => detail.value?.hargamcu || '');
     const bodyText = computed(() => detail.value?.isimcu || '');
-    const imageSrc = computed(() => detail.value?.gambarmcu ? `/uploads/mcu/${detail.value.gambarmcu}` : null);
+    const imageSrc = computed(() => detail.value?.gambarmcu ? `${API_URL}/uploads/mcu/${detail.value.gambarmcu}` : null);
 
     const latestRawatJalan = computed(() => [...rawatJalanList.value].slice(0, 3));
     const latestRawatInap = computed(() => [...rawatInapList.value].slice(0, 3));
@@ -230,6 +230,8 @@ export default defineComponent({
     const latestLab = computed(() => [...labList.value].slice(0, 3));
     const latestRadiologi = computed(() => [...radiologiList.value].slice(0, 3));
     const latestMCU = computed(() => [...mcuList.value].slice(0, 3));
+
+    const API_URL = import.meta.env.VITE_API_URL;
 
     return {
       fasilitas,
@@ -250,6 +252,7 @@ export default defineComponent({
       overlayImage,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   },
 });

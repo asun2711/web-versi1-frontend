@@ -45,7 +45,7 @@
               <img
                 class="berita-img"
                 :src="item.gambarmcu
-                  ? `/uploads/mcu/${item.gambarmcu}`
+                  ? `${API_URL}/uploads/mcu/${item.gambarmcu}`
                   : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namamcu"
               />
@@ -268,6 +268,8 @@ export default defineComponent({
       router.push({ name: routes[type], params: { id } });
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       rawatJalanList,
@@ -284,6 +286,7 @@ export default defineComponent({
       latestMcu,
       isActiveTab,
       goToDetail,
+      API_URL,
     };
   },
 });

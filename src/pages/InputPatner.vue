@@ -35,7 +35,7 @@
             <td class="id-cell">{{ item.id }}</td>
             <td class="nama-cell">{{ item.namapatner }}</td>
             <td class="gambar-cell">
-              <img v-if="item.gambarpatner" :src="`/uploads/patner/${item.gambarpatner}`" alt="Gambar" />
+              <img v-if="item.gambarpatner" :src="`${API_URL}/uploads/patner/${item.gambarpatner}`" alt="Gambar" />
             </td>
             <td class="aksi-cell">
               <div class="action-buttons">
@@ -149,7 +149,7 @@ export default {
     // ================== EDIT ==================
     const editPatner = (item: Patner) => {
       Object.assign(form, item);
-      logoPreview.value = item.gambarpatner ? `/uploads/patner/${item.gambarpatner}` : null;
+      logoPreview.value = item.gambarpatner ? `${API_URL}/uploads/patner/${item.gambarpatner}` : null;
       gambarpatner.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarpatner') as HTMLInputElement | null;
@@ -169,6 +169,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarpatner,
@@ -180,6 +182,7 @@ export default {
       editPatner,
       deletePatner,
       cancelEdit,
+      API_URL,
     };
   },
 };

@@ -12,11 +12,11 @@
         <div class="card" v-for="item in strukturList" :key="item.id">
           <div
             class="card-img-wrapper"
-            @click="openImageModal(item.gambardireksi ? `/uploads/struktur/${item.gambardireksi}` : '')"
+            @click="openImageModal(item.gambardireksi ? `${API_URL}/uploads/struktur/${item.gambardireksi}` : '')"
           >
             <img
               v-if="item.gambardireksi"
-              :src="`/uploads/struktur/${item.gambardireksi}`"
+              :src="`${API_URL}/uploads/struktur/${item.gambardireksi}`"
               :alt="item.namadireksi"
               class="card-img"
             />
@@ -69,11 +69,14 @@ export default {
 
     onMounted(fetchStruktur);
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       strukturList,
       modalImage,
       openImageModal,
       closeImageModal,
+      API_URL,
     };
   },
 };

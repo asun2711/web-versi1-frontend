@@ -67,7 +67,7 @@
             <td class="wrap-text">{{ item.spesialis?.judulspesialis || '-' }}</td>
             <td class="wrap-text-pre">{{ item.jadwaldokter }}</td>
             <td class="gambar-cell">
-              <img v-if="item.gambardokter" :src="`/uploads/dokter/${item.gambardokter}`" alt="Gambar" />
+              <img v-if="item.gambardokter" :src="`${API_URL}/uploads/dokter/${item.gambardokter}`" alt="Gambar" />
             </td>
             <td class="wrap-text-pre">{{ item.sertifikatstrdokter }}</td>
             <td class="wrap-text-pre">{{ item.sertifikatsipdokter }}</td>
@@ -217,7 +217,7 @@ export default {
       form.jadwaldokter = item.jadwaldokter;
       form.sertifikatstrdokter = item.sertifikatstrdokter;
       form.sertifikatsipdokter = item.sertifikatsipdokter;
-      logoPreview.value = item.gambardokter ? `/uploads/dokter/${item.gambardokter}` : null;
+      logoPreview.value = item.gambardokter ? `${API_URL}/uploads/dokter/${item.gambardokter}` : null;
       gambardokter.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambardokter') as HTMLInputElement | null;
@@ -236,6 +236,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambardokter,
@@ -248,6 +250,7 @@ export default {
       editDokter,
       deleteDokter,
       cancelEdit,
+      API_URL,
     };
   },
 };

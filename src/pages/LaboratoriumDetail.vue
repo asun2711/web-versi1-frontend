@@ -152,7 +152,7 @@ export default defineComponent({
     const bodyText = computed(() => detail.value?.isilaboratorium || '');
     const imageSrc = computed(() =>
       detail.value?.gambarlaboratorium
-        ? `/uploads/laboratorium/${detail.value.gambarlaboratorium}`
+        ? `${API_URL}/uploads/laboratorium/${detail.value.gambarlaboratorium}`
         : null
     );
 
@@ -229,6 +229,8 @@ export default defineComponent({
 
     watch(() => route.params.id, fetchDetail);
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       detail,
@@ -255,6 +257,7 @@ export default defineComponent({
       isActiveTab,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   },
 });

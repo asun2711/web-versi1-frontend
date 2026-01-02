@@ -57,7 +57,7 @@
             <td class="gambar-cell">
               <img
                 v-if="item.gambarmcu"
-                :src="`/uploads/mcu/${item.gambarmcu}`"
+                :src="`${API_URL}/uploads/mcu/${item.gambarmcu}`"
                 alt="Gambar"
               />
             </td>
@@ -191,7 +191,7 @@ export default {
       form.hargamcu = item.hargamcu;
       form.isimcu = item.isimcu;
 
-      logoPreview.value = item.gambarmcu ? `/uploads/mcu/${item.gambarmcu}` : null;
+      logoPreview.value = item.gambarmcu ? `${API_URL}/uploads/mcu/${item.gambarmcu}` : null;
       gambarmcu.value = null;
 
       isEditing.value = true;
@@ -213,6 +213,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarmcu,
@@ -225,6 +227,7 @@ export default {
       deleteMcu,
       cancelEdit,
       resetForm,
+      API_URL,
     };
   },
 };

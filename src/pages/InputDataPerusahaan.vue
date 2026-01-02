@@ -74,7 +74,7 @@
             <td class="nama-cell">{{ item.namaperusahaan }}</td>
             <td class="alamat-cell">{{ item.alamatperusahaan }}</td>
             <td class="logo-cell">
-              <img v-if="item.logoperusahaan" :src="`/uploads/perusahaan/${item.logoperusahaan}`" alt="Logo" />
+              <img v-if="item.logoperusahaan" :src="`${API_URL}/uploads/perusahaan/${item.logoperusahaan}`" alt="Logo" />
             </td>
             <td class="telepon-cell">{{ item.teleponumum }}</td>
             <td class="telepon-cell">{{ item.telepondarurat }}</td>
@@ -157,7 +157,7 @@ export default {
         if (!allowedTypes.includes(file.type)) {
           alert('Format file salah! Hanya jpg, jpeg, png, dan gif yang diperbolehkan.');
           logoperusahaan.value = null;
-          logoPreview.value = form.logoperusahaan ? `/uploads/perusahaan/${form.logoperusahaan}` : null;
+          logoPreview.value = form.logoperusahaan ? `${API_URL}/uploads/perusahaan/${form.logoperusahaan}` : null;
           target.value = '';
           return;
         }
@@ -165,7 +165,7 @@ export default {
         logoPreview.value = URL.createObjectURL(file);
       } else {
         logoperusahaan.value = null;
-        logoPreview.value = form.logoperusahaan ? `/uploads/perusahaan/${form.logoperusahaan}` : null;
+        logoPreview.value = form.logoperusahaan ? `${API_URL}/uploads/perusahaan/${form.logoperusahaan}` : null;
       }
     };
 
@@ -225,7 +225,7 @@ export default {
 
     const editPerusahaan = (item: Perusahaan) => {
       Object.assign(form, item);
-      logoPreview.value = item.logoperusahaan ? `/uploads/perusahaan/${item.logoperusahaan}` : null;
+      logoPreview.value = item.logoperusahaan ? `${API_URL}/uploads/perusahaan/${item.logoperusahaan}` : null;
       logoperusahaan.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('logoperusahaan') as HTMLInputElement | null;
@@ -244,6 +244,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       logoperusahaan,
@@ -256,6 +258,7 @@ export default {
       deletePerusahaan,
       cancelEdit,
       formatPhone,
+      API_URL,
     };
   },
 };

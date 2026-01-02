@@ -43,7 +43,7 @@
               <img
                 class="berita-img"
                 :src="item.gambarradiologi
-                  ? `/uploads/radiologi/${item.gambarradiologi}`
+                  ? `${API_URL}/uploads/radiologi/${item.gambarradiologi}`
                   : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namaradiologi"
               />
@@ -243,6 +243,8 @@ export default defineComponent({
 
     onMounted(fetchData);
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       rawatJalanList,
@@ -259,6 +261,7 @@ export default defineComponent({
       latestMcu,
       isActiveTab,
       goToDetail,
+      API_URL,
     };
   },
 });

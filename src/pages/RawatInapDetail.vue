@@ -179,7 +179,7 @@ export default defineComponent({
 
     const imageSrc = computed(() => {
       if (!detail.value?.gambarrawatinap) return null;
-      return `/uploads/rawatinap/${detail.value.gambarrawatinap}`;
+      return `${API_URL}/uploads/rawatinap/${detail.value.gambarrawatinap}`;
     });
 
     const latestRawatJalan = computed(() => rawatJalanList.value.slice(0, 3));
@@ -244,6 +244,8 @@ export default defineComponent({
 
     watch(() => route.params.id, fetchDetail);
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       detail,
@@ -266,6 +268,7 @@ export default defineComponent({
       closeOverlay,
       showOverlay,
       overlayImage,
+      API_URL,
     };
   },
 });

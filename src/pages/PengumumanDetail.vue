@@ -35,7 +35,7 @@
           <img
             v-if="pengumuman.gambarpengumuman"
             class="pengumuman-img"
-            :src="`/uploads/pengumuman/${pengumuman.gambarpengumuman}`"
+            :src="`${API_URL}/uploads/pengumuman/${pengumuman.gambarpengumuman}`"
             :alt="pengumuman.judulpengumuman"
             @click="openOverlay(pengumuman.gambarpengumuman)"
           />
@@ -219,7 +219,7 @@ export default {
 
     // Overlay
     const openOverlay = (img: string) => {
-      overlayImage.value = `/uploads/pengumuman/${img}`;
+      overlayImage.value = `${API_URL}/uploads/pengumuman/${img}`;
       showOverlay.value = true;
     };
     const closeOverlay = () => (showOverlay.value = false);
@@ -239,6 +239,8 @@ export default {
       }
     );
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       publikasi,
       pengumuman,
@@ -256,6 +258,7 @@ export default {
       overlayImage,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   },
 };

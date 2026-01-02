@@ -165,7 +165,7 @@ export default defineComponent({
     // Computed
     const titleText = computed(() => detail.value?.namaradiologi || '');
     const bodyText = computed(() => detail.value?.isiradiologi || '');
-    const imageSrc = computed(() => detail.value?.gambarradiologi ? `/uploads/radiologi/${detail.value.gambarradiologi}` : null);
+    const imageSrc = computed(() => detail.value?.gambarradiologi ? `${API_URL}/uploads/radiologi/${detail.value.gambarradiologi}` : null);
 
     const latestRawatJalan = computed(() => rawatJalanList.value.slice(0,3));
     const latestRawatInap = computed(() => rawatInapList.value.slice(0,3));
@@ -243,6 +243,8 @@ export default defineComponent({
 
     watch(() => route.params.id, fetchDetail);
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       detail,
@@ -267,6 +269,7 @@ export default defineComponent({
       goToDetail,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   }
 });

@@ -52,7 +52,7 @@
             <td>{{ item.namadireksi }}</td>
             <td>{{ item.gelardireksi }}</td>
             <td>
-              <img v-if="item.gambardireksi" :src="`/uploads/struktur/${item.gambardireksi}`" />
+              <img v-if="item.gambardireksi" :src="`${API_URL}/uploads/struktur/${item.gambardireksi}`" />
             </td>
             <td>{{ item.jabatandireksi }}</td>
             <td>{{ item.masajabatandireksi }}</td>
@@ -171,7 +171,7 @@ export default {
       form.gelardireksi = item.gelardireksi;
       form.jabatandireksi = item.jabatandireksi;
       form.masajabatandireksi = item.masajabatandireksi;
-      logoPreview.value = item.gambardireksi ? `/uploads/struktur/${item.gambardireksi}` : null;
+      logoPreview.value = item.gambardireksi ? `${API_URL}/uploads/struktur/${item.gambardireksi}` : null;
       gambardireksi.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambardireksi') as HTMLInputElement | null;
@@ -189,6 +189,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambardireksi,
@@ -200,6 +202,7 @@ export default {
       editStruktur,
       deleteStruktur,
       cancelEdit,
+      API_URL,
     };
   },
 };

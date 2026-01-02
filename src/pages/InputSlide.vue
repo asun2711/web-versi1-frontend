@@ -42,7 +42,7 @@
             <td>{{ item.judulslide }}</td>
             <td>{{ item.isislide }}</td>
             <td>
-              <img v-if="item.gambarslide" :src="`/uploads/slide/${item.gambarslide}`" />
+              <img v-if="item.gambarslide" :src="`${API_URL}/uploads/slide/${item.gambarslide}`" />
             </td>
             <td>
               <button @click="editSlide(item)">Edit</button>
@@ -147,7 +147,7 @@ export default {
 
     const editSlide = (item: Slide) => {
       Object.assign(form, item);
-      logoPreview.value = item.gambarslide ? `/uploads/slide/${item.gambarslide}` : null;
+      logoPreview.value = item.gambarslide ? `${API_URL}/uploads/slide/${item.gambarslide}` : null;
       gambarslide.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarslide') as HTMLInputElement | null;
@@ -165,6 +165,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarslide,
@@ -176,6 +178,7 @@ export default {
       editSlide,
       deleteSlide,
       cancelEdit,
+      API_URL,
     };
   },
 };

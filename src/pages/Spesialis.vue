@@ -41,7 +41,7 @@ export default {
   setup() {
     const router = useRouter(); // ✅ instance router
     const spesialis = ref<Spesialis[]>([]);
-    const apiBase = "/uploads/spesialis/";
+    const apiBase = import.meta.env.VITE_API_URL + '/uploads/spesialis/';
 
     const loadData = async () => {
       try {

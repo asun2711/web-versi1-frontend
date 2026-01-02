@@ -47,7 +47,7 @@
               <img
                 class="pengumuman-img"
                 :src="pengumuman.gambarpengumuman
-                  ? `/uploads/pengumuman/${pengumuman.gambarpengumuman}`
+                  ? `${API_URL}/uploads/pengumuman/${pengumuman.gambarpengumuman}`
                   : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="pengumuman.judulpengumuman"/>
               <p class="pengumuman-desc" :class="{ expanded: pengumuman.showFull }">
@@ -205,6 +205,8 @@ export default {
 
     onMounted(fetchData);
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       publikasi,
       beritaList,
@@ -217,6 +219,7 @@ export default {
       isActiveTab,
       formatTanggal,
       goToDetail,
+      API_URL,
     };
   },
 };

@@ -35,7 +35,7 @@
           <img
             v-if="penghargaan.gambarpenghargaan"
             class="penghargaan-img"
-            :src="`/uploads/penghargaan/${penghargaan.gambarpenghargaan}`"
+            :src="`${API_URL}/uploads/penghargaan/${penghargaan.gambarpenghargaan}`"
             :alt="penghargaan.judulpenghargaan"
             @click="openOverlay(penghargaan.gambarpenghargaan)"/>
 
@@ -199,7 +199,7 @@ export default defineComponent({
     };
 
     const openOverlay = (img: string) => {
-      overlayImage.value = `/uploads/penghargaan/${img}`;
+      overlayImage.value = `${API_URL}/uploads/penghargaan/${img}`;
       showOverlay.value = true;
     };
     const closeOverlay = () => { showOverlay.value = false; };
@@ -213,6 +213,8 @@ export default defineComponent({
       fetchDetail();
       window.scrollTo(0, 0);
     });
+
+    const API_URL = import.meta.env.VITE_API_URL;
 
     return {
       publikasi,
@@ -231,6 +233,7 @@ export default defineComponent({
       goToDetail,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   },
 });

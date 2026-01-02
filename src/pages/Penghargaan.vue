@@ -47,7 +47,7 @@
               <img
                 class="penghargaan-img"
                 :src="penghargaan.gambarpenghargaan
-                  ? `/uploads/penghargaan/${penghargaan.gambarpenghargaan}`
+                  ? `${API_URL}/uploads/penghargaan/${penghargaan.gambarpenghargaan}`
                   : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="penghargaan.judulpenghargaan"/>
               <p class="penghargaan-desc" :class="{ expanded: penghargaan.showFull }">
@@ -203,6 +203,8 @@ export default defineComponent({
       fetchData();
     });
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       publikasi,
       beritaList,
@@ -215,6 +217,7 @@ export default defineComponent({
       isActiveTab,
       formatTanggal,
       goToDetail,
+      API_URL,
     };
   },
 });

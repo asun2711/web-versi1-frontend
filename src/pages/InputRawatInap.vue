@@ -47,7 +47,7 @@
             <td>{{ item.namarawatinap }}</td>
             <td>{{ item.isirawatinap }}</td>
             <td>
-              <img v-if="item.gambarrawatinap" :src="`/uploads/rawatinap/${item.gambarrawatinap}`" />
+              <img v-if="item.gambarrawatinap" :src="`${API_URL}/uploads/rawatinap/${item.gambarrawatinap}`" />
             </td>
             <td>
               <button @click="editRawatInap(item)">Edit</button>
@@ -156,7 +156,7 @@ export default {
         namarawatinap: item.namarawatinap,
         isirawatinap: item.isirawatinap,
       });
-      logoPreview.value = item.gambarrawatinap ? `/uploads/rawatinap/${item.gambarrawatinap}` : null;
+      logoPreview.value = item.gambarrawatinap ? `${API_URL}/uploads/rawatinap/${item.gambarrawatinap}` : null;
       gambarrawatinap.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarrawatinap') as HTMLInputElement | null;
@@ -174,6 +174,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarrawatinap,
@@ -186,6 +188,7 @@ export default {
       deleteRawatInap,
       cancelEdit,
       resetForm,
+      API_URL,
     };
   },
 };

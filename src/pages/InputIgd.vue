@@ -50,7 +50,7 @@
             <td class="gambar-cell">
               <img
                 v-if="item.gambarigd"
-                :src="`/uploads/igd/${item.gambarigd}`"
+                :src="`${API_URL}/uploads/igd/${item.gambarigd}`"
                 alt="Gambar"
               />
             </td>
@@ -167,7 +167,7 @@ export default {
       form.id = item.id;
       form.namaigd = item.namaigd;
       form.isiigd = item.isiigd;
-      logoPreview.value = item.gambarigd ? `/uploads/igd/${item.gambarigd}` : null;
+      logoPreview.value = item.gambarigd ? `${API_URL}/uploads/igd/${item.gambarigd}` : null;
       gambarigd.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarigd') as HTMLInputElement | null;
@@ -186,6 +186,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarigd,
@@ -198,6 +200,7 @@ export default {
       deleteIgd,
       cancelEdit,
       resetForm,
+      API_URL,
     };
   },
 };

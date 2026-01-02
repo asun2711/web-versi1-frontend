@@ -43,7 +43,7 @@
             <div class="content-row">
               <img
                 class="berita-img"
-                :src="item.gambarrawatjalan ? `/uploads/rawatjalan/${item.gambarrawatjalan}` : 'https://via.placeholder.com/150x150?text=No+Image'"
+                :src="item.gambarrawatjalan ? `${API_URL}/uploads/rawatjalan/${item.gambarrawatjalan}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namarawatjalan"
               />
               <p class="berita-desc">{{ item.isirawatjalan }}</p>
@@ -218,6 +218,8 @@ export default defineComponent({
       fetchData();
     });
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       rawatJalanList,
@@ -234,6 +236,7 @@ export default defineComponent({
       latestMcu,
       isActiveTab,
       goToDetail,
+      API_URL,
     };
   },
 });

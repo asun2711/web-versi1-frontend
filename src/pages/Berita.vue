@@ -46,7 +46,7 @@
             <div class="content-row">
               <img
                 class="berita-img"
-                :src="berita.gambarberita ? `/uploads/berita/${berita.gambarberita}` : 'https://via.placeholder.com/150x150?text=No+Image'"
+                :src="berita.gambarberita ? `${API_URL}/uploads/berita/${berita.gambarberita}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="berita.judulberita"/>
               <p class="berita-desc">{{ berita.isiberita }}</p>
             </div>
@@ -129,6 +129,7 @@ export default {
     const beritaList = ref<Berita[]>([]);
     const pengumumanList = ref<Pengumuman[]>([]);
     const penghargaanList = ref<Penghargaan[]>([]);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const fetchData = async () => {
       try {
@@ -194,7 +195,8 @@ export default {
       latestPenghargaan,
       activeTab,
       formatTanggal,
-      goToDetail
+      goToDetail, 
+      API_URL,
     };
   }
 };

@@ -35,7 +35,7 @@
           <img
             v-if="berita.gambarberita"
             class="berita-img"
-            :src="`/uploads/berita/${berita.gambarberita}`"
+            :src="`${API_URL}/uploads/berita/${berita.gambarberita}`"
             :alt="berita.judulberita"
             @click="openOverlay(berita.gambarberita)"/>
 
@@ -204,13 +204,15 @@ export default defineComponent({
     };
 
     const openOverlay = (img: string) => {
-      overlayImage.value = `/uploads/berita/${img}`;
+      overlayImage.value = `${API_URL}/uploads/berita/${img}`;
       showOverlay.value = true;
     };
 
     const closeOverlay = () => {
       showOverlay.value = false;
     };
+
+    const API_URL = import.meta.env.VITE_API_URL;
 
     return {
       publikasi,
@@ -228,6 +230,7 @@ export default defineComponent({
       goToDetail,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   }
 });

@@ -87,7 +87,7 @@ export default {
     const route = useRoute();
     const spesialisId = Number(route.params.id);
     const dokterList = ref<DokterType[]>([]);
-    const apiBase = '/uploads/dokter/';
+    const apiBase = import.meta.env.VITE_API_URL + '/uploads/dokter/';
     const modalImage = ref<string | null>(null);
 
     const loadDokter = async () => {

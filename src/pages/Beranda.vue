@@ -5,7 +5,7 @@
     <section class="hero-card">
       <img
         v-if="activeSlide.gambarslide"
-        :src="`/uploads/slide/${activeSlide.gambarslide}`"
+        :src="`${API_URL}/uploads/slide/${activeSlide.gambarslide}`"
         class="hero-img"
         alt="Slide Image"/>
       <div class="hero-content">
@@ -49,7 +49,7 @@
     <section class="section-card sejarah-card">
       <img
         v-if="sejarah?.gambarsejarah"
-        :src="`/uploads/sejarah/${sejarah.gambarsejarah}`"
+        :src="`${API_URL}/uploads/sejarah/${sejarah.gambarsejarah}`"
         class="sejarah-img"
         alt="Sejarah RSUD Talang Ubi"/>
       <h3 class="title-justify">
@@ -89,7 +89,7 @@
           @click="goToDetail('pengumuman', item.id)">
           <img
             v-if="item.gambarpengumuman"
-            :src="`/uploads/pengumuman/${item.gambarpengumuman}`"
+            :src="`${API_URL}/uploads/pengumuman/${item.gambarpengumuman}`"
             class="pengumuman-img"
             :alt="item.judulpengumuman"/>
           
@@ -127,7 +127,7 @@
           @click="goToDetail('penghargaan', item.id)">
           <img
             v-if="item.gambarpenghargaan"
-            :src="`/uploads/penghargaan/${item.gambarpenghargaan}`"
+            :src="`${API_URL}/uploads/penghargaan/${item.gambarpenghargaan}`"
             class="penghargaan-img"
             :alt="item.judulpenghargaan"/>
 
@@ -181,6 +181,7 @@ export default {
     const penghargaanList = ref<any[]>([]);
     const sejarah = ref<any | null>(null);
     const heroSlides = ref<any[]>([]);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const menuCards = ref([
       { label: 'Beranda', link: '/' },
@@ -307,9 +308,9 @@ export default {
       currentSlide, heroSlides, activeSlide,
       beritaList, latestBerita, activeBreaking, breakingIndex, nextSlide, prevSlide, nextBreaking, prevBreaking,
       pengumumanList, latestPengumuman, penghargaanList, latestPenghargaan,
-      sejarah, misiList, errorMsg,
+      sejarah, misiList, errorMsg, API_URL,
       formatTanggal, goToDetail, goToCard,
-      menuCards, marqueeContent, pauseMarquee, resumeMarquee
+      menuCards, marqueeContent, pauseMarquee, resumeMarquee,
     };
   }
 };

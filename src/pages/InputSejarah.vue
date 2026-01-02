@@ -52,7 +52,7 @@
             <td>{{ item.judulsejarah }}</td>
             <td>{{ item.isisejarah }}</td>
             <td>
-              <img v-if="item.gambarsejarah" :src="`/uploads/sejarah/${item.gambarsejarah}`" />
+              <img v-if="item.gambarsejarah" :src="`${API_URL}/uploads/sejarah/${item.gambarsejarah}`" />
             </td>
             <td>{{ item.visi }}</td>
             <td>{{ item.misi }}</td>
@@ -167,7 +167,7 @@ export default {
 
     const editSejarah = (item: Sejarah) => {
       Object.assign(form, item);
-      logoPreview.value = item.gambarsejarah ? `/uploads/sejarah/${item.gambarsejarah}` : null;
+      logoPreview.value = item.gambarsejarah ? `${API_URL}/uploads/sejarah/${item.gambarsejarah}` : null;
       gambarsejarah.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarsejarah') as HTMLInputElement | null;
@@ -185,6 +185,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarsejarah,
@@ -196,6 +198,7 @@ export default {
       editSejarah,
       deleteSejarah,
       cancelEdit,
+      API_URL,
     };
   },
 };

@@ -51,7 +51,7 @@
             <td>{{ item.username }}</td>
             <td><a :href="item.link" target="_blank">{{ item.link }}</a></td>
             <td>
-              <img v-if="item.iconsosialmedia" :src="`/uploads/sosialmedia/${item.iconsosialmedia}`" />
+              <img v-if="item.iconsosialmedia" :src="`${API_URL}/uploads/sosialmedia/${item.iconsosialmedia}`" />
             </td>
             <td>
               <button @click="editSosialMedia(item)">Edit</button>
@@ -160,7 +160,7 @@ export default {
 
     const editSosialMedia = (item: SosialMedia) => {
       Object.assign(form, item);
-      logoPreview.value = item.iconsosialmedia ? `/uploads/sosialmedia/${item.iconsosialmedia}` : null;
+      logoPreview.value = item.iconsosialmedia ? `${API_URL}/uploads/sosialmedia/${item.iconsosialmedia}` : null;
       iconsosialmedia.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('iconsosialmedia') as HTMLInputElement | null;
@@ -178,6 +178,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       iconsosialmedia,
@@ -189,6 +191,7 @@ export default {
       editSosialMedia,
       deleteSosialMedia,
       cancelEdit,
+      API_URL,
     };
   },
 };

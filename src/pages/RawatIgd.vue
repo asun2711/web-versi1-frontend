@@ -42,7 +42,7 @@
             <div class="content-row">
               <img
                 class="berita-img"
-                :src="item.gambarigd ? `/uploads/igd/${item.gambarigd}` : 'https://via.placeholder.com/150x150?text=No+Image'"
+                :src="item.gambarigd ? `${API_URL}/uploads/igd/${item.gambarigd}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namaigd"
               />
               <p class="berita-desc">{{ item.isiigd }}</p>
@@ -161,6 +161,8 @@ export default defineComponent({
       fetchData();
     });
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       rawatJalanList,
@@ -171,6 +173,7 @@ export default defineComponent({
       latestIGD,
       isActiveTab,
       goToDetail,
+      API_URL,
     };
   },
 });

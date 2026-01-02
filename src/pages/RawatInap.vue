@@ -41,7 +41,7 @@
             <div class="content-row">
               <img
                 class="berita-img"
-                :src="item.gambarrawatinap ? `/uploads/rawatinap/${item.gambarrawatinap}` : 'https://via.placeholder.com/150x150?text=No+Image'"
+                :src="item.gambarrawatinap ? `${API_URL}/uploads/rawatinap/${item.gambarrawatinap}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namarawatinap"
               />
               <p class="berita-desc">{{ item.isirawatinap }}</p>
@@ -153,6 +153,8 @@ export default defineComponent({
 
     onMounted(() => fetchData());
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       rawatJalanList,
@@ -163,6 +165,7 @@ export default defineComponent({
       latestIGD,
       isActiveTab,
       goToDetail,
+      API_URL,
     };
   },
 });

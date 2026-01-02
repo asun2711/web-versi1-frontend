@@ -43,7 +43,7 @@
             <div class="content-row">
               <img
                 class="berita-img"
-                :src="item.gambarlaboratorium ? `/uploads/laboratorium/${item.gambarlaboratorium}` : 'https://via.placeholder.com/150x150?text=No+Image'"
+                :src="item.gambarlaboratorium ? `${API_URL}/uploads/laboratorium/${item.gambarlaboratorium}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namalaboratorium"
               />
               <p class="berita-desc">{{ item.isilaboratorium }}</p>
@@ -190,6 +190,8 @@ export default defineComponent({
       router.push({ name: routes[type], params: { id } });
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     onMounted(() => fetchData());
 
     return {
@@ -208,6 +210,7 @@ export default defineComponent({
       latestMcu,
       isActiveTab,
       goToDetail,
+      API_URL,
     };
   },
 });

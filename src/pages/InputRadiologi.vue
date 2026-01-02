@@ -47,7 +47,7 @@
             <td>{{ item.namaradiologi }}</td>
             <td>{{ item.isiradiologi }}</td>
             <td>
-              <img v-if="item.gambarradiologi" :src="`/uploads/radiologi/${item.gambarradiologi}`" />
+              <img v-if="item.gambarradiologi" :src="`${API_URL}/uploads/radiologi/${item.gambarradiologi}`" />
             </td>
             <td>
               <button @click="editRadiologi(item)">Edit</button>
@@ -155,7 +155,7 @@ export default {
         namaradiologi: item.namaradiologi,
         isiradiologi: item.isiradiologi,
       });
-      logoPreview.value = item.gambarradiologi ? `/uploads/radiologi/${item.gambarradiologi}` : null;
+      logoPreview.value = item.gambarradiologi ? `${API_URL}/uploads/radiologi/${item.gambarradiologi}` : null;
       gambarradiologi.value = null;
       isEditing.value = true;
       const inputFile = document.getElementById('gambarradiologi') as HTMLInputElement | null;
@@ -173,6 +173,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarradiologi,
@@ -185,6 +187,7 @@ export default {
       deleteRadiologi,
       cancelEdit,
       resetForm,
+      API_URL,
     };
   },
 };

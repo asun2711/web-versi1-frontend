@@ -50,7 +50,7 @@
             <td class="gambar-cell">
               <img
                 v-if="item.gambarlaboratorium"
-                :src="`/uploads/laboratorium/${item.gambarlaboratorium}`"
+                :src="`${API_URL}/uploads/laboratorium/${item.gambarlaboratorium}`"
                 alt="Gambar"
               />
             </td>
@@ -179,7 +179,7 @@ export default {
       form.namalaboratorium = item.namalaboratorium;
       form.isilaboratorium = item.isilaboratorium;
 
-      logoPreview.value = item.gambarlaboratorium ? `/uploads/laboratorium/${item.gambarlaboratorium}` : null;
+      logoPreview.value = item.gambarlaboratorium ? `${API_URL}/uploads/laboratorium/${item.gambarlaboratorium}` : null;
       gambarlaboratorium.value = null;
 
       isEditing.value = true;
@@ -201,6 +201,8 @@ export default {
       }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       form,
       gambarlaboratorium,
@@ -213,6 +215,7 @@ export default {
       deleteLaboratorium,
       cancelEdit,
       resetForm,
+      API_URL,
     };
   },
 };

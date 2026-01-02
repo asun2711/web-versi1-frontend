@@ -153,9 +153,9 @@ export default defineComponent({
 
     const imageSrc = computed(() => {
       if (!detail.value) return null;
-      if ((detail.value as any).gambarrawatjalan) return `/uploads/rawatjalan/${(detail.value as any).gambarrawatjalan}`;
-      if ((detail.value as any).gambarrawatinap) return `/uploads/rawatinap/${(detail.value as any).gambarrawatinap}`;
-      if ((detail.value as any).gambarigd) return `/uploads/igd/${(detail.value as any).gambarigd}`;
+      if ((detail.value as any).gambarrawatjalan) return `${API_URL}/uploads/rawatjalan/${(detail.value as any).gambarrawatjalan}`;
+      if ((detail.value as any).gambarrawatinap) return `${API_URL}/uploads/rawatinap/${(detail.value as any).gambarrawatinap}`;
+      if ((detail.value as any).gambarigd) return `${API_URL}/uploads/igd/${(detail.value as any).gambarigd}`;
       return null;
     });
 
@@ -223,6 +223,8 @@ export default defineComponent({
       fetchDetail();
     });
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     return {
       fasilitas,
       detail,
@@ -241,6 +243,7 @@ export default defineComponent({
       overlayImage,
       openOverlay,
       closeOverlay,
+      API_URL,
     };
   },
 });
