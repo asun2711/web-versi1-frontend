@@ -51,8 +51,12 @@
             <td>{{ item.id }}</td>
             <td>{{ item.judulsejarah }}</td>
             <td>{{ item.isisejarah }}</td>
-            <td>
-              <img v-if="item.gambarsejarah" :src="`${API_URL}/uploads/sejarah/${item.gambarsejarah}`" />
+            <td class="gambar-cell">
+              <img
+                v-if="item.gambarsejarah"
+                :src="`${API_URL}/uploads/sejarah/${item.gambarsejarah}`"
+                alt="Gambar Sejarah"
+              />
             </td>
             <td>{{ item.visi }}</td>
             <td>{{ item.misi }}</td>

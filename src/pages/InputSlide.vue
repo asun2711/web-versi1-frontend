@@ -41,8 +41,12 @@
             <td>{{ item.id }}</td>
             <td>{{ item.judulslide }}</td>
             <td>{{ item.isislide }}</td>
-            <td>
-              <img v-if="item.gambarslide" :src="`${API_URL}/uploads/slide/${item.gambarslide}`" />
+            <td class="gambar-cell">
+              <img
+                v-if="item.gambarslide"
+                :src="`${API_URL}/uploads/slide/${item.gambarslide}`"
+                alt="Gambar Slide"
+              />
             </td>
             <td>
               <button @click="editSlide(item)">Edit</button>
