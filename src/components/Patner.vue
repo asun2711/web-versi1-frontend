@@ -42,7 +42,7 @@ export default {
         const list: PatnerAPI[] = await patnerApi.getAll();
         gaya.value = list.map(p => ({
           ...p,
-          image: p.gambarpatner ? `/uploads/patner/${p.gambarpatner}` : "",
+          image: p.gambarpatner ? `${API_URL}/uploads/patner/${p.gambarpatner}` : "",
         }));
       } catch (error) {
         console.error("Gagal mengambil data partner:", error);
@@ -53,10 +53,12 @@ export default {
     onMounted(fetchPatner);
 
     const duplicatedgaya = computed(() => [...gaya.value, ...gaya.value, ...gaya.value]);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     return {
       gaya,
       duplicatedgaya,
+      API_URL,
     };
   },
 };

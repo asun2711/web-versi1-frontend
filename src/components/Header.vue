@@ -120,6 +120,7 @@ export default {
     return {
       logoHeader,
       dropdowns,
+      API_URL,
     };
   },
 };
