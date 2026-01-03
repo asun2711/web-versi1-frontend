@@ -48,7 +48,7 @@
                 alt="Gambar Slide"
               />
             </td>
-             <td class="aksi-cell">
+            <td class="aksi-cell">
               <div class="action-buttons">
                 <button @click="editSlide(item)" class="btn-edit">Edit</button>
                 <button @click="deleteSlide(item.id)" class="btn-delete">Hapus</button>
