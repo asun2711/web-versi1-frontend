@@ -60,9 +60,11 @@
             </td>
             <td>{{ item.visi }}</td>
             <td>{{ item.misi }}</td>
-            <td>
-              <button @click="editSejarah(item)">Edit</button>
-              <button @click="deleteSejarah(item.id)">Hapus</button>
+            <td class="aksi-cell">
+              <div class="action-buttons">
+                <button @click="editSejarah(item)" class="btn-edit">Edit</button>
+                <button @click="deleteSejarah(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>

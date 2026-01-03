@@ -56,9 +56,11 @@
             </td>
             <td>{{ item.jabatandireksi }}</td>
             <td>{{ item.masajabatandireksi }}</td>
-            <td>
-              <button @click="editStruktur(item)">Edit</button>
-              <button @click="deleteStruktur(item.id)">Hapus</button>
+            <td class="aksi-cell">
+              <div class="action-buttons">
+                <button @click="editStruktur(item)" class="btn-edit">Edit</button>
+                <button @click="deleteStruktur(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>

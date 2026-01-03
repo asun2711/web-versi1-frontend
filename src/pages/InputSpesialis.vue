@@ -38,9 +38,11 @@
             <td>
               <img v-if="item.gambarspesialis" :src="`${API_URL}/uploads/spesialis/${item.gambarspesialis}`" />
             </td>
-            <td>
-              <button @click="editSpesialis(item)">Edit</button>
-              <button @click="deleteSpesialis(item.id)">Hapus</button>
+            <td class="aksi-cell">
+              <div class="action-buttons">
+                <button @click="editSpesialis(item)" class="btn-edit">Edit</button>
+                <button @click="deleteSpesialis(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>

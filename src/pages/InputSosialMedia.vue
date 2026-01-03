@@ -53,9 +53,11 @@
             <td>
               <img v-if="item.iconsosialmedia" :src="`${API_URL}/uploads/sosialmedia/${item.iconsosialmedia}`" />
             </td>
-            <td>
-              <button @click="editSosialMedia(item)">Edit</button>
-              <button @click="deleteSosialMedia(item.id)">Hapus</button>
+            <td class="aksi-cell">
+              <div class="action-buttons">
+                <button @click="editSosialMedia(item)" class="btn-edit">Edit</button>
+                <button @click="deleteSosialMedia(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>

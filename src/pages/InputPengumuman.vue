@@ -56,9 +56,11 @@
             </td>
             <td>{{ formatTanggal(item.tanggalpengumuman) }}</td>
             <td>{{ item.namauploader }}</td>
-            <td>
-              <button @click="editPengumuman(item)">Edit</button>
-              <button @click="deletePengumuman(item.id)">Hapus</button>
+            <td class="aksi-cell">
+              <div class="action-buttons">
+                <button @click="editPengumuman(item)" class="btn-edit">Edit</button>
+                <button @click="deletePengumuman(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>
