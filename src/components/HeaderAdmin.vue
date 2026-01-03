@@ -173,6 +173,7 @@ export default {
       toggleNotification,
       unreadMessages,
       handleLogout,
+      API_URL,
     };
   },
 };

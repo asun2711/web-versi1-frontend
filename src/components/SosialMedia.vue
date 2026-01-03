@@ -83,7 +83,7 @@
           @click="openLink(item.link)"
         >
           <img
-            :src="`/uploads/sosialmedia/${item.iconsosialmedia || ''}`"
+            :src="`${API_URL}/uploads/sosialmedia/${item.iconsosialmedia || ''}`"
             :alt="item.namasosialmedia"
           />
           <div>
@@ -251,6 +251,8 @@ export default {
       startSlider();
     });
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     onUnmounted(() => clearInterval(timer));
 
     return {
@@ -262,6 +264,7 @@ export default {
       openLink,
       onMouseEnter,
       onMouseLeave,
+      API_URL,
     };
   },
 };
