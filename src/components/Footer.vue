@@ -49,7 +49,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© {{ year }} {{ perusahaan?.namaperusahaan || "Sun Web" }} — Support By Kakak Asun F. All rights reserved.</p>
+      <p>© {{ year }} {{ perusahaan?.namaperusahaan || "Sun Web" }} — Support By Kakak Asun. All rights reserved.</p>
     </div>
   </aside>
 </template>
