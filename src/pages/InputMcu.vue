@@ -326,6 +326,7 @@ td {
 
 .aksi-cell {
   min-width: 120px;
+  white-space: nowrap;
 }
 
 .action-buttons {

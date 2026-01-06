@@ -49,7 +49,7 @@
             <td>
               <img v-if="item.gambarradiologi" :src="`${API_URL}/uploads/radiologi/${item.gambarradiologi}`" />
             </td>
-            <td>
+            <td class="aksi-cell">
               <button @click="editRadiologi(item)">Edit</button>
               <button @click="deleteRadiologi(item.id)">Hapus</button>
             </td>
@@ -286,6 +286,7 @@ td {
 
 .aksi-cell {
   min-width: 120px;
+  white-space: nowrap;
 }
 
 .action-buttons {
