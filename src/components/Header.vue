@@ -5,8 +5,12 @@
         <img v-if="logoHeader" :src="logoHeader" alt="Logo RSUD" />
         <span v-else>RSUD</span>
       </h1>
+
       <ul class="menu">
-        <li><RouterLink to="/">Beranda</RouterLink></li>
+        <li>
+          <RouterLink to="/">Beranda</RouterLink>
+        </li>
+
         <li
           v-for="(item, key) in dropdowns"
           :key="key"
@@ -22,7 +26,9 @@
           <Transition name="fade-slide">
             <ul v-if="item.open" class="submenu">
               <li v-for="sub in item.submenu" :key="sub.name">
-                <RouterLink :to="sub.link">{{ sub.name }}</RouterLink>
+                <RouterLink :to="sub.link">
+                  {{ sub.name }}
+                </RouterLink>
               </li>
             </ul>
           </Transition>
@@ -33,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { perusahaanApi } from "@/services/api";
 import type { Perusahaan } from "@/services/api";
 
@@ -76,7 +82,9 @@ export default {
       informasi: {
         label: "Informasi",
         open: false,
-        submenu: [{ name: "Spesialis", link: "/informasi/spesialis" }],
+        submenu: [
+          { name: "Spesialis", link: "/informasi/spesialis" },
+        ],
       },
       fasilitas: {
         label: "Fasilitas",
@@ -93,7 +101,9 @@ export default {
       Layanan: {
         label: "Layanan",
         open: false,
-        submenu: [{ name: "Pengaduan", link: "/layanan/pengaduan" }],
+        submenu: [
+          { name: "Pengaduan", link: "/layanan/pengaduan" },
+        ],
       },
     });
 
@@ -182,7 +192,7 @@ export default {
   padding: 0.5rem 0;
   min-width: 150px;
   border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
   transition: all 0.3s ease;
 }
@@ -212,11 +222,13 @@ export default {
 .fade-slide-leave-active {
   transition: all 0.3s ease;
 }
+
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
   transform: translateY(-10px);
 }
+
 .fade-slide-enter-to,
 .fade-slide-leave-from {
   opacity: 1;
