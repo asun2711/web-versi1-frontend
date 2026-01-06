@@ -231,7 +231,7 @@ export default defineComponent({
 
         if (
           username.value.toLowerCase() === 'admin' &&
-          password.value === 'KakakAsun' &&
+          password.value === '@$un27' &&
           (!needsCaptcha.value || captchaVerified.value)
         ) {
           const now = Date.now();
