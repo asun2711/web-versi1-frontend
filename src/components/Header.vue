@@ -1,18 +1,25 @@
 <template>
   <aside class="header">
-    <nav class="nav container">
+    <nav class="container nav">
+      <!-- LOGO -->
       <h1 class="logo">
         <img v-if="logoHeader" :src="logoHeader" alt="Logo RSUD" />
         <span v-else>RSUD</span>
       </h1>
+
+      <!-- MENU -->
       <ul class="menu">
-        <li><RouterLink to="/">Beranda</RouterLink></li>
+        <li>
+          <RouterLink to="/">Beranda</RouterLink>
+        </li>
+
         <li
           v-for="(item, key) in dropdowns"
           :key="key"
           class="dropdown"
           @mouseenter="item.open = true"
           @mouseleave="item.open = false"
+          @click="item.open = !item.open"
         >
           <span class="dropdown-title">
             {{ item.label }}
@@ -22,7 +29,9 @@
           <Transition name="fade-slide">
             <ul v-if="item.open" class="submenu">
               <li v-for="sub in item.submenu" :key="sub.name">
-                <RouterLink :to="sub.link">{{ sub.name }}</RouterLink>
+                <RouterLink :to="sub.link">
+                  {{ sub.name }}
+                </RouterLink>
               </li>
             </ul>
           </Transition>
@@ -33,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { perusahaanApi } from "@/services/api";
 import type { Perusahaan } from "@/services/api";
 
@@ -90,7 +99,7 @@ export default {
           { name: "MCU", link: "/fasilitas/mcu" },
         ],
       },
-      Layanan: {
+      layanan: {
         label: "Layanan",
         open: false,
         submenu: [{ name: "Pengaduan", link: "/layanan/pengaduan" }],
@@ -100,65 +109,67 @@ export default {
     const fetchLogo = async () => {
       try {
         const perusahaanList: Perusahaan[] = await perusahaanApi.getAll();
-        const firstPerusahaan = perusahaanList[0];
+        const perusahaan = perusahaanList[0];
 
-        if (firstPerusahaan?.logoperusahaan) {
-          logoHeader.value = `${API_URL}/uploads/perusahaan/${firstPerusahaan.logoperusahaan}`;
-        } else {
-          logoHeader.value = "";
-        }
+        logoHeader.value = perusahaan?.logoperusahaan
+          ? `${API_URL}/uploads/perusahaan/${perusahaan.logoperusahaan}`
+          : "";
       } catch (error) {
         console.error("Gagal mengambil logo:", error);
         logoHeader.value = "";
       }
     };
 
-    onMounted(() => {
-      fetchLogo();
-    });
+    onMounted(fetchLogo);
 
     return {
       logoHeader,
       dropdowns,
-      API_URL,
     };
   },
 };
 </script>
 
 <style scoped>
+/* =====================
+   HEADER BASE
+===================== */
 .header {
-  width: 100vw;
-  background: white;
+  width: 100%;
+  background: #ffffff;
   padding: 1rem 0;
-  margin: 0;
-  box-sizing: border-box;
 }
 
 .container {
-  width: 100%;
-  padding: 0 5%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
 }
 
+/* =====================
+   LOGO
+===================== */
 .logo img {
   height: 60px;
   width: auto;
 }
 
+/* =====================
+   MENU DESKTOP
+===================== */
 .menu {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
   list-style: none;
 }
 
 .menu a,
 .dropdown-title {
-  color: #000000;
   font-weight: bold;
+  color: #000;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -169,6 +180,9 @@ export default {
   color: #03ce7d;
 }
 
+/* =====================
+   DROPDOWN
+===================== */
 .dropdown {
   position: relative;
 }
@@ -178,59 +192,77 @@ export default {
   top: 100%;
   left: 0;
   background: #ffffff;
-  list-style: none;
+  min-width: 180px;
   padding: 0.5rem 0;
-  min-width: 150px;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 10;
-  transition: all 0.3s ease;
+  border-radius: 6px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  z-index: 20;
 }
 
 .submenu li {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.submenu li a {
-  color: #000000;
-  text-decoration: none;
+  padding: 0.6rem 1rem;
 }
 
 .submenu li:hover {
-  background-color: #ffffff;
-  box-shadow: 0 2px 6px rgba(2, 201, 122, 0.72);
-  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1px #03ce7d;
 }
 
-.submenu li a:hover {
+.submenu a:hover {
   color: #03ce7d;
 }
 
+/* =====================
+   TRANSITION
+===================== */
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
+
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-10px);
-}
-.fade-slide-enter-to,
-.fade-slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
+  transform: translateY(-8px);
 }
 
+/* =====================
+   ARROW
+===================== */
 .arrow {
+  margin-left: 4px;
   display: inline-block;
-  margin-left: 0.25rem;
   transition: transform 0.3s ease;
-  transform: rotate(0deg);
 }
 
 .arrow.open {
   transform: rotate(180deg);
+}
+
+/* =====================
+   RESPONSIVE MOBILE
+===================== */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 1rem;
+  }
+
+  .menu li {
+    width: 100%;
+    padding: 0.75rem 0;
+  }
+
+  .submenu {
+    position: static;
+    box-shadow: none;
+    padding-left: 1rem;
+  }
 }
 </style>
