@@ -45,13 +45,15 @@
           <tr v-for="item in radiologiList" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.namaradiologi }}</td>
-            <td>{{ item.isiradiologi }}</td>
+            <td class="isi-cell">{{ item.isiradiologi }}</td>
             <td>
               <img v-if="item.gambarradiologi" :src="`${API_URL}/uploads/radiologi/${item.gambarradiologi}`" />
             </td>
             <td class="aksi-cell">
-              <button @click="editRadiologi(item)">Edit</button>
-              <button @click="deleteRadiologi(item.id)">Hapus</button>
+              <div class="action-buttons">
+                <button @click="editRadiologi(item)" class="btn-edit">Edit</button>
+                <button @click="deleteRadiologi(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>

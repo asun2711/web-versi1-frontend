@@ -45,13 +45,15 @@
           <tr v-for="item in rawatinapList" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.namarawatinap }}</td>
-            <td>{{ item.isirawatinap }}</td>
+           <td class="isi-cell">{{ item.isirawatinap }}</td>
             <td>
               <img v-if="item.gambarrawatinap" :src="`${API_URL}/uploads/rawatinap/${item.gambarrawatinap}`" />
             </td>
             <td class="aksi-cell">
-              <button @click="editRawatInap(item)">Edit</button>
-              <button @click="deleteRawatInap(item.id)">Hapus</button>
+              <div class="action-buttons">
+                <button @click="editRawatInap(item)" class="btn-edit">Edit</button>
+                <button @click="deleteRawatInap(item.id)" class="btn-delete">Hapus</button>
+              </div>
             </td>
           </tr>
         </tbody>
