@@ -28,7 +28,7 @@
           <div class="chatbot-input">
             <input
               v-model="input"
-              placeholder="Tanya dokter, spesialis, IGD, layanan, berita, sejarah..."
+              placeholder="Tanya dokter, spesialis, IGD..."
               @keyup.enter="send"
             />
             <button @click="send">Kirim</button>
@@ -394,7 +394,7 @@ const send = async () => {
 .chatbot-input {
   display: flex;
   padding: 16px;
-  gap: 12px;
+  gap: 8px;
   border-top: 1px solid #e5e7eb;
   background: #fff;
   flex-shrink: 0;
@@ -402,12 +402,13 @@ const send = async () => {
 
 .chatbot-input input {
   flex: 1;
-  padding: 12px 16px;
+  padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid #d1d5db;
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease;
+  min-width: 0;
 }
 
 .chatbot-input input:focus {
@@ -419,12 +420,14 @@ const send = async () => {
   background: linear-gradient(135deg, #03ce7d, #6cf3bd);
   color: #fff;
   border: none;
-  padding: 0 24px;
+  padding: 0 20px;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .chatbot-input button:hover {
@@ -473,44 +476,43 @@ const send = async () => {
     right: 20px;
     left: 20px;
     width: auto;
-    max-height: calc(100svh - 150px);
-    height: auto;
-    min-height: 300px;
+    max-height: 70vh;
+    height: 500px;
     border-radius: 20px;
   }
 
   .chatbot-header {
     padding: 14px 16px;
-    flex-shrink: 0;
   }
 
   .chatbot-body {
     padding: 16px;
-    flex: 1;
-    min-height: 200px;
-    overflow-y: auto;
-    padding-bottom: 70px;
+    padding-bottom: 60px;
   }
 
   .chatbot-input {
-    padding: 12px 16px;
-    position: sticky;
-    bottom: 0;
+    padding: 12px 14px;
+    gap: 6px;
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    right: 20px;
     background: #fff;
-    z-index: 10;
+    border-radius: 0 0 20px 20px;
     border-top: 1px solid #e5e7eb;
-    flex-shrink: 0;
   }
 
   .chatbot-input input {
-    padding: 10px 14px;
-    font-size: 16px;
+    padding: 10px 12px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 0;
   }
 
   .chatbot-input button {
-    padding: 0 20px;
+    padding: 0 16px;
     font-size: 13px;
-    min-height: 44px;
+    width: 80px;
   }
 
   .msg {
@@ -542,11 +544,12 @@ const send = async () => {
     bottom: 80px;
     right: 16px;
     left: 16px;
-    max-height: calc(100svh - 130px);
+    max-height: 65vh;
+    height: 450px;
   }
 
   .chatbot-header {
-    padding: 12px 16px;
+    padding: 12px 14px;
     font-size: 15px;
   }
 
@@ -558,24 +561,28 @@ const send = async () => {
 
   .chatbot-body {
     padding: 14px;
-    padding-bottom: 60px;
+    padding-bottom: 50px;
   }
 
   .chatbot-input {
-    padding: 10px 14px;
-    gap: 8px;
+    padding: 10px 12px;
+    gap: 4px;
+    bottom: 80px;
+    left: 16px;
+    right: 16px;
   }
 
   .chatbot-input input {
-    padding: 9px 12px;
+    padding: 8px 10px;
     font-size: 13px;
+    width: 60%;
   }
 
   .chatbot-input button {
-    padding: 0 16px;
+    padding: 0 12px;
     font-size: 12px;
+    width: 70px;
     border-radius: 10px;
-    min-height: 42px;
   }
 }
 
@@ -585,21 +592,23 @@ const send = async () => {
     bottom: 70px;
     right: 8px;
     left: 8px;
-    max-height: calc(100svh - 110px);
+    max-height: 60vh;
+    height: 400px;
   }
-  
-  .chatbot-body {
-    padding-bottom: 50px;
-  }
-}
 
-/* iOS Safari specific fixes */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 768px) {
-    .chatbot-window {
-      max-height: -webkit-fill-available;
-      height: calc(100vh - 140px);
-    }
+  .chatbot-input {
+    bottom: 70px;
+    left: 8px;
+    right: 8px;
+  }
+
+  .chatbot-input input {
+    width: 55%;
+  }
+
+  .chatbot-input button {
+    width: 65px;
+    padding: 0 10px;
   }
 }
 
