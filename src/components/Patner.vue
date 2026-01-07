@@ -69,7 +69,7 @@ export default {
   width: 100vw;
   margin: 0;
   background: #19ba7a;
-  padding: 2rem 5%;
+  padding: 2rem 6.2%;
   box-sizing: border-box;
   text-align: center;
 }

@@ -2,8 +2,8 @@
   <aside class="header">
     <nav class="nav container">
       <h1 class="logo">
-        <img v-if="logoHeader" :src="logoHeader" alt="Logo RSUD" />
-        <span v-else class="logo-fallback">RSUD</span>
+        <img v-if="logoHeader" :src="logoHeader" alt="Logo" />
+        <span v-else class="logo-fallback">Logo</span>
       </h1>
       
       <div class="mobile-toggle" @click="toggleMobileMenu" :aria-expanded="isMobileMenuOpen" aria-label="Toggle menu">
