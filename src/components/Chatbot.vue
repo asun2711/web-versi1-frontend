@@ -473,30 +473,44 @@ const send = async () => {
     right: 20px;
     left: 20px;
     width: auto;
-    max-height: 70vh;
-    height: 500px;
+    max-height: calc(100svh - 150px);
+    height: auto;
+    min-height: 300px;
     border-radius: 20px;
   }
 
   .chatbot-header {
     padding: 14px 16px;
+    flex-shrink: 0;
   }
 
   .chatbot-body {
     padding: 16px;
+    flex: 1;
+    min-height: 200px;
+    overflow-y: auto;
+    padding-bottom: 70px;
   }
 
   .chatbot-input {
     padding: 12px 16px;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    z-index: 10;
+    border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
   }
 
   .chatbot-input input {
     padding: 10px 14px;
+    font-size: 16px;
   }
 
   .chatbot-input button {
     padding: 0 20px;
     font-size: 13px;
+    min-height: 44px;
   }
 
   .msg {
@@ -528,8 +542,7 @@ const send = async () => {
     bottom: 80px;
     right: 16px;
     left: 16px;
-    max-height: 65vh;
-    height: 450px;
+    max-height: calc(100svh - 130px);
   }
 
   .chatbot-header {
@@ -545,6 +558,7 @@ const send = async () => {
 
   .chatbot-body {
     padding: 14px;
+    padding-bottom: 60px;
   }
 
   .chatbot-input {
@@ -561,6 +575,7 @@ const send = async () => {
     padding: 0 16px;
     font-size: 12px;
     border-radius: 10px;
+    min-height: 42px;
   }
 }
 
@@ -570,8 +585,21 @@ const send = async () => {
     bottom: 70px;
     right: 8px;
     left: 8px;
-    max-height: 60vh;
-    height: 400px;
+    max-height: calc(100svh - 110px);
+  }
+  
+  .chatbot-body {
+    padding-bottom: 50px;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .chatbot-window {
+      max-height: -webkit-fill-available;
+      height: calc(100vh - 140px);
+    }
   }
 }
 
