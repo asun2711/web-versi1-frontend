@@ -2,8 +2,9 @@
   <section 
     class="dashboard-welcome" 
     :style="{ backgroundImage: `url(${bgImage})` }"
-  >
-    <div class="overlay"></div> 
+    role="banner"
+    aria-label="Selamat datang di Rumah Sakit Umum Daerah Talang Ubi">
+    <div class="overlay" aria-hidden="true"></div>
     <h1 class="fade-in-up">
       Selamat Datang <br>Di Rumah Sakit Umum Daerah Talang Ubi
     </h1>
@@ -14,7 +15,7 @@
 import bgImage from '@/assets/images/baground_rsud.jpg';
 
 export default {
-  name: "DashboardWelcome",
+  name: "Admin",
   data() {
     return { bgImage };
   },
@@ -24,20 +25,21 @@ export default {
 <style scoped>
 .dashboard-welcome {
   position: relative;
-  min-height: 80vh;
+  height: 80vh;
+  min-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
 
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  background-attachment: scroll;
+  background-position: center center;
+  background-attachment: fixed; 
 
   color: white;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: bold;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
 
@@ -50,7 +52,11 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.1)
+  );
   pointer-events: none;
   z-index: 0;
 }
@@ -59,14 +65,15 @@ export default {
   position: relative;
   z-index: 1;
   animation: fadeInUp 1s ease forwards;
-  max-width: 90%;
-  word-break: break-word;
+  line-height: 1.3;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;
@@ -74,37 +81,29 @@ export default {
   }
 }
 
-/* Media Queries untuk responsif */
-@media screen and (max-width: 1024px) {
+/* Media queries untuk responsif */
+@media (max-width: 768px) {
   .dashboard-welcome {
-    font-size: 2.2rem;
-    min-height: 80vh;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .dashboard-welcome {
-    font-size: 1.8rem;
-    min-height: 75vh;
-    padding: 0 1rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .dashboard-welcome {
-    font-size: 1.5rem;
-    min-height: 70vh;
+    height: 70vh;
+    padding: 0 0.5rem;
   }
   
-  .fade-in-up {
-    max-width: 95%;
+  .dashboard-welcome {
+    background-attachment: scroll; /* Nonaktifkan fixed di mobile untuk performa */
   }
 }
 
-/* Dukungan untuk browser lama */
-@supports not (background-size: cover) {
+@media (max-width: 480px) {
   .dashboard-welcome {
-    background-size: 100% 100%;
+    height: 60vh;
+    font-size: 1.8rem;
+  }
+}
+
+/* Mendukung prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    animation: none;
   }
 }
 </style>

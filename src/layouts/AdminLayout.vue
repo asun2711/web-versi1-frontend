@@ -1,8 +1,8 @@
 <template>
   <div class="admin-layout">
-    <Sidebar :isOpen="sidebarOpen" />
+    <Sidebar :is-open="sidebarOpen" @close="closeSidebar" />
     <div :class="['admin-content', { shifted: sidebarOpen }]">
-      <HeaderAdmin @toggle-sidebar="toggleSidebar" :sidebarOpen="sidebarOpen" />
+      <HeaderAdmin @toggle-sidebar="toggleSidebar" :sidebar-open="sidebarOpen" />
       <main>
         <RouterView />
       </main>
@@ -31,48 +31,63 @@ export default {
       sidebarOpen.value = false;
     }
 
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.key === "Escape" && sidebarOpen.value) {
+        closeSidebar();
+      }
+    }
+
     function onClickOutside(event: MouseEvent) {
       const sidebarElement = document.querySelector(".sidebar");
       const target = event.target as HTMLElement;
+      const menuButton = target.closest(".menu-icon");
+      
       if (
         sidebarOpen.value &&
         sidebarElement &&
         !sidebarElement.contains(target) &&
-        !target.closest(".menu-icon") 
+        !menuButton
       ) {
         closeSidebar();
       }
     }
 
-    let inactivityTimeout: number;
+    let inactivityTimeout: ReturnType<typeof setTimeout>;
 
     const handleLogout = () => {
-      localStorage.removeItem("auth_token"); 
-      router.push("/login"); 
+      localStorage.removeItem("auth_token");
+      router.push("/login");
     };
 
     const resetInactivityTimeout = () => {
       clearTimeout(inactivityTimeout);
-      inactivityTimeout = window.setTimeout(() => {
-        alert("Anda telah logout karena tidak ada aktivitas selama 5 menit.");
+      inactivityTimeout = setTimeout(() => {
+        alert("Anda telah logout karena tidak ada aktivitas selama 10 menit.");
         handleLogout();
-      }, 600000);
+      }, 600000); // 10 menit
     };
 
     onMounted(() => {
       document.addEventListener("click", onClickOutside);
-      window.addEventListener("mousemove", resetInactivityTimeout);
-      window.addEventListener("keydown", resetInactivityTimeout);
-      window.addEventListener("scroll", resetInactivityTimeout);
-      resetInactivityTimeout(); 
+      document.addEventListener("keydown", handleEscapeKey);
+      
+      const activityEvents = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+      activityEvents.forEach(event => {
+        window.addEventListener(event, resetInactivityTimeout);
+      });
+      
+      resetInactivityTimeout();
     });
 
     onBeforeUnmount(() => {
       document.removeEventListener("click", onClickOutside);
-
-      window.removeEventListener("mousemove", resetInactivityTimeout);
-      window.removeEventListener("keydown", resetInactivityTimeout);
-      window.removeEventListener("scroll", resetInactivityTimeout);
+      document.removeEventListener("keydown", handleEscapeKey);
+      
+      const activityEvents = ["mousemove", "keydown", "scroll", "click", "touchstart"];
+      activityEvents.forEach(event => {
+        window.removeEventListener(event, resetInactivityTimeout);
+      });
+      
       clearTimeout(inactivityTimeout);
     });
 
@@ -90,14 +105,16 @@ export default {
   display: flex;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .admin-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s ease, transform 0.3s ease;
   margin-left: 0;
+  min-width: 0; /* Untuk mencegah overflow di mobile */
 }
 
 .admin-content.shifted {
@@ -108,5 +125,21 @@ main {
   padding: 1rem;
   background: #fafafa;
   flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .admin-content.shifted {
+    margin-left: 0;
+    transform: translateX(220px);
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 0.75rem;
+  }
 }
 </style>

@@ -182,7 +182,11 @@ export default {
 <style scoped>
 .HeaderAdmin {
   background: white;
-  padding: 1rem 0.5rem 2rem 0.5rem;
+  padding: 1rem 0rem 2rem 0rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-bar {
@@ -213,11 +217,23 @@ export default {
   cursor: pointer;
   user-select: none;
   transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+  min-width: 44px;
+  min-height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.menu-icon:focus {
+  outline: 2px solid #03ce7d;
+  outline-offset: 2px;
 }
 
 .icon-hover:hover {
   color: #03ce7d;
   transform: scale(1.2);
+  background-color: rgba(3, 206, 125, 0.1);
 }
 
 .logo {
@@ -232,17 +248,18 @@ export default {
 .logo img {
   height: 60px;
   width: auto;
+  object-fit: contain;
 }
 
 .logo-shifted {
-  margin-left: -15px;
+  margin-left: -10px;
 }
 
 .submenu {
   position: absolute;
-  top: 0;
-  right: 100%;
-  margin-right: 8px;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -251,6 +268,11 @@ export default {
   padding: 0.5rem 0;
   min-width: 150px;
   z-index: 1000;
+}
+
+.submenu-left {
+  right: 0;
+  left: auto;
 }
 
 .submenu li {
@@ -300,10 +322,16 @@ export default {
   transition: background-color 0.3s;
   width: 100%;
   margin-top: 0.5rem;
+  min-height: 44px;
 }
 
 .logout-button:hover {
   background-color: #029e56;
+}
+
+.logout-button:focus {
+  outline: 2px solid #029e56;
+  outline-offset: 2px;
 }
 
 .notification-badge {
@@ -316,5 +344,101 @@ export default {
   top: 0;
   right: 0;
   transform: translate(50%, -50%);
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive untuk berbagai platform */
+@media (max-width: 768px) {
+  .HeaderAdmin {
+    padding: 0rem;
+  }
+  
+  .nav-bar {
+    padding: 0rem 0rem;
+  }
+  
+  .logo img {
+    height: 50px;
+    max-width: 180px;
+    margin-left: -1rem; 
+  }
+
+  .logo-shifted {
+    margin-left: 1rem; 
+  }
+  
+  .menu-icon {
+    font-size: 1.25rem;
+    min-width: 40px;
+    min-height: 40px;
+    line-height: 40px;
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .submenu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border-radius: 12px 12px 0 0;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .submenu-left {
+    right: 0;
+    left: auto;
+    position: absolute;
+    top: 100%;
+    bottom: auto;
+    border-radius: 4px;
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    height: 40px;
+    max-width: 140px; 
+  }
+  
+  .menu-left li,
+  .menu-right li {
+    margin: 0 0.25rem;
+  }
+  
+  .notification-badge {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.3rem;
+    min-width: 16px;
+    height: 16px;
+  }
+}
+
+/* Optimasi untuk perangkat touch */
+@media (hover: none) and (pointer: coarse) {
+  .menu-icon {
+    min-width: 48px;
+    min-height: 48px;
+    line-height: 48px;
+  }
+  
+  .submenu li {
+    padding: 0.75rem 1rem;
+  }
+  
+  .logout-button {
+    min-height: 48px;
+  }
 }
 </style>
