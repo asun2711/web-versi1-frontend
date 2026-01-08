@@ -9,16 +9,15 @@
 
     <section v-for="item in sejarahList" :key="item.id">
       <section class="section-split">
-        <div class="text-side">
-          <h2 class="pre-wrap">{{ item.judulsejarah }}</h2>
-          <p class="pre-wrap">{{ item.isisejarah }}</p>
-        </div>
         <div class="image-side">
           <img
             v-if="item.gambarsejarah"
             :src="`${API_URL}/uploads/sejarah/${item.gambarsejarah}`"
-            :alt="item.judulsejarah"
-          />
+            :alt="item.judulsejarah"/>
+        </div>
+        <div class="text-side">
+          <h2 class="pre-wrap">{{ item.judulsejarah }}</h2>
+          <p class="pre-wrap">{{ item.isisejarah }}</p>
         </div>
       </section>
 

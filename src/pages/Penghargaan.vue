@@ -15,7 +15,7 @@
         </div>
       </section>
 
-      <section class="kategori-tabs kategori-right">
+      <section class="kategori-tabs kategori-right desktop-only">
         <div class="tabs-wrapper">
           <span class="tab-item active">Informasi Terbaru</span>
         </div>
@@ -69,6 +69,13 @@
 
       <!-- Sidebar Informasi Terbaru -->
       <aside class="informasi-terbaru-card">
+        <!-- Header untuk mobile -->
+        <div class="informasi-header mobile-only">
+          <div class="tabs-wrapper">
+            <span class="tab-item active">Informasi Terbaru</span>
+          </div>
+        </div>
+        
         <div class="card-utama">
           <div class="sub-cards">
             <!-- Berita -->
@@ -224,37 +231,525 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.two-columns { display: flex; gap: 20px; padding: 0 5%; }
-.penghargaan-list { flex: 0 0 80%; }
-.penghargaan-card { display:flex; flex-direction: column; background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:25px; margin-bottom:32px; cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.penghargaan-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
-.meta-row { color:#777; display:flex; gap:10px; font-size:0.9em; }
-.judul-penghargaan { font-size:1.5em; color:#19ba7a; font-weight:700; margin:10px 0 15px 0; }
-.content-wrapper { display:flex; flex-direction:column; flex:1; }
-.content-row { display:flex; gap:18px; }
-.penghargaan-img { width:150px; height:150px; border-radius:12px; object-fit:cover; }
-.penghargaan-desc { flex:1; color:#444; line-height:1.5em; text-align:justify; overflow:hidden; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:5; line-clamp:5; max-height:calc(1.5em*5); transition:all 0.3s ease; }
-.penghargaan-desc.expanded { -webkit-line-clamp:unset; line-clamp:unset; max-height:none; }
-.btn-wrapper { display:flex; justify-content:flex-end; margin-top:12px; }
-.btn-readmore { padding:6px 14px; background:#19ba7a; color:#fff; border-radius:12px; border:none; cursor:pointer; font-size:0.9em; transition: background 0.3s ease; }
-.btn-readmore:hover { background:#159b5f; }
+/* Reset dan Base Styles */
+.page-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
 
-/* Sidebar */
-.informasi-terbaru-card { flex: 0 0 20%; display:flex; flex-direction:column; }
-.informasi-terbaru-card .card-utama { background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:12px; display:flex; flex-direction:column; gap:6px; }
-.sub-cards { display:flex; flex-direction:column; gap:4px; }
-.sub-card { background:#f9f9f9; padding:6px; border-radius:12px; cursor:pointer; transition:all 0.3s ease; }
-.sub-card:hover { background:#e0f7ef; transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.08); }
-.sub-card-title { font-size:0.8em; font-weight:bold; margin:2px 0; color:#19ba7a; text-align:justify; }
-.sub-card-desc { font-size:0.65em; color:#444; line-height:1.2em; text-align:justify; margin:0; }
-.kategori { font-size:0.65em; font-weight:bold; color:#999; text-transform:uppercase; }
+/* Utility Classes untuk Responsive */
+.mobile-only {
+  display: block;
+}
 
-/* Top row tabs */
-.top-row { display:flex; gap:20px; align-items:center; padding:0 5%; margin-bottom:20px; }
-.kategori-tabs.kategori-left { flex:0 0 80%; background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.05); padding:20px; }
-.kategori-tabs.kategori-right { flex:0 0 20%; background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:20px; text-align:center; }
-.tabs-wrapper { display:flex; gap:30px; font-size:1.2em; }
-.tab-item { cursor:pointer; padding:6px 12px; color:#19ba7a; font-weight:bold; border-radius:8px; transition:all 0.3s ease; }
-.tab-item:hover { color:#159b5f; background-color: rgba(25,186,122,0.1); }
-.tab-item.active { border-bottom:2px solid #19ba7a; }
+.desktop-only {
+  display: none;
+}
+
+/* --- Mobile First Styles (0-767px) --- */
+
+/* Top Row - Mobile */
+.top-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.kategori-tabs {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.kategori-left {
+  overflow-x: auto;
+}
+
+.kategori-right {
+  text-align: center;
+}
+
+.tabs-wrapper {
+  display: flex;
+  gap: 16px;
+  font-size: 1em;
+  min-width: min-content;
+}
+
+.tab-item {
+  cursor: pointer;
+  padding: 6px 12px;
+  color: #19ba7a;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.tab-item:hover {
+  color: #159b5f;
+  background-color: rgba(25,186,122,0.1);
+}
+
+.tab-item.active {
+  border-bottom: 2px solid #19ba7a;
+}
+
+/* Two Columns Layout - Mobile */
+.two-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 16px;
+}
+
+.penghargaan-list {
+  width: 100%;
+  order: 1;
+}
+
+.penghargaan-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.penghargaan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.meta-row {
+  color: #777;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85em;
+}
+
+.judul-penghargaan {
+  font-size: 1.5em;
+  color: #19ba7a;
+  font-weight: 700;
+  margin: 10px 0 15px 0;
+  line-height: 1.3;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.content-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.penghargaan-img {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.penghargaan-desc {
+  flex: 1;
+  color: #444;
+  line-height: 1.5em;
+  text-align: justify;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  max-height: calc(1.5em * 5);
+  transition: all 0.3s ease;
+}
+
+.penghargaan-desc.expanded {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  max-height: none;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.btn-readmore {
+  padding: 8px 16px;
+  background: #19ba7a;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background 0.3s ease;
+}
+
+.btn-readmore:hover {
+  background: #159b5f;
+}
+
+/* Informasi Terbaru - Mobile */
+.informasi-terbaru-card {
+  width: 100%;
+  order: 2;
+}
+
+.informasi-header {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.card-utama {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sub-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sub-card {
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sub-card:hover {
+  background: #e0f7ef;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.sub-card-title {
+  font-size: 0.95em;
+  font-weight: bold;
+  margin: 4px 0;
+  color: #19ba7a;
+  text-align: justify;
+  line-height: 1.3;
+}
+
+.sub-card-desc {
+  font-size: 0.85em;
+  color: #444;
+  line-height: 1.4em;
+  text-align: justify;
+  margin: 0;
+}
+
+.kategori {
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #999;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* --- Tablet Styles (768px - 1023px) --- */
+@media (min-width: 768px) {
+  /* Utility Classes */
+  .mobile-only {
+    display: none;
+  }
+  
+  .desktop-only {
+    display: block;
+  }
+  
+  /* Top Row */
+  .top-row {
+    flex-direction: row;
+    padding: 0 5%;
+    gap: 20px;
+  }
+  
+  .kategori-tabs {
+    padding: 20px;
+    border-radius: 16px;
+  }
+  
+  .kategori-left {
+    flex: 0 0 70%;
+  }
+  
+  .kategori-right {
+    flex: 0 0 30%;
+  }
+  
+  .tabs-wrapper {
+    font-size: 1.1em;
+    gap: 20px;
+  }
+  
+  /* Two Columns Layout */
+  .two-columns {
+    flex-direction: row;
+    padding: 0 5%;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  
+  .penghargaan-list {
+    flex: 0 0 70%;
+    order: 1;
+  }
+  
+  .informasi-terbaru-card {
+    flex: 0 0 30%;
+    order: 2;
+  }
+  
+  .informasi-header {
+    margin-bottom: 0;
+  }
+  
+  /* Penghargaan Card */
+  .penghargaan-card {
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  
+  .penghargaan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  
+  .judul-penghargaan {
+    font-size: 1.5em;
+  }
+  
+  .content-row {
+    flex-direction: row;
+    gap: 18px;
+  }
+  
+  .penghargaan-img {
+    width: 150px;
+    height: 150px;
+    min-width: 150px;
+  }
+  
+  .meta-row {
+    font-size: 0.9em;
+    gap: 10px;
+  }
+  
+  /* Informasi Terbaru */
+  .card-utama {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 12px;
+    gap: 6px;
+  }
+  
+  .sub-cards {
+    gap: 4px;
+  }
+  
+  .sub-card {
+    padding: 8px;
+    border-radius: 12px;
+  }
+  
+  .sub-card:hover {
+    background: #e0f7ef;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  
+  .sub-card-title {
+    font-size: 0.85em;
+  }
+  
+  .sub-card-desc {
+    font-size: 0.75em;
+    line-height: 1.2em;
+  }
+  
+  .kategori {
+    font-size: 0.7em;
+  }
+  
+  .btn-readmore {
+    padding: 6px 14px;
+    border-radius: 12px;
+  }
+}
+
+/* --- Desktop Styles (1024px ke atas) --- */
+@media (min-width: 1024px) {
+  /* Top Row */
+  .top-row {
+    padding: 0 5%;
+  }
+  
+  .kategori-left {
+    flex: 0 0 80%;
+  }
+  
+  .kategori-right {
+    flex: 0 0 20%;
+  }
+  
+  .tabs-wrapper {
+    font-size: 1.2em;
+    gap: 30px;
+  }
+  
+  /* Two Columns Layout */
+  .two-columns {
+    padding: 0 5%;
+    gap: 20px;
+  }
+  
+  .penghargaan-list {
+    flex: 0 0 80%;
+  }
+  
+  .informasi-terbaru-card {
+    flex: 0 0 20%;
+  }
+  
+  /* Penghargaan Card */
+  .penghargaan-card {
+    padding: 25px;
+  }
+  
+  /* Informasi Terbaru */
+  .card-utama {
+    padding: 12px;
+  }
+  
+  .sub-card {
+    padding: 6px;
+  }
+  
+  .sub-card-title {
+    font-size: 0.8em;
+  }
+  
+  .sub-card-desc {
+    font-size: 0.65em;
+  }
+  
+  .kategori {
+    font-size: 0.65em;
+  }
+}
+
+/* --- Large Desktop Styles (1440px ke atas) --- */
+@media (min-width: 1440px) {
+  .top-row {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .two-columns {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .penghargaan-card {
+    padding: 32px;
+  }
+}
+
+/* --- Touch Device Optimizations --- */
+@media (hover: none) and (pointer: coarse) {
+  .tab-item:hover {
+    color: #19ba7a;
+    background-color: transparent;
+  }
+  
+  .penghargaan-card:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  .sub-card:hover {
+    background: #f9f9f9;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .btn-readmore:hover {
+    background: #19ba7a;
+  }
+}
+
+/* --- Print Styles --- */
+@media print {
+  .top-row,
+  .informasi-terbaru-card {
+    display: none;
+  }
+  
+  .two-columns {
+    display: block;
+    padding: 0;
+  }
+  
+  .penghargaan-list {
+    width: 100%;
+  }
+  
+  .penghargaan-card {
+    box-shadow: none;
+    padding: 0;
+    page-break-inside: avoid;
+  }
+  
+  .judul-penghargaan {
+    color: #000;
+  }
+  
+  .penghargaan-desc {
+    color: #000;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    max-height: none;
+  }
+  
+  .btn-wrapper {
+    display: none;
+  }
+}
 </style>
