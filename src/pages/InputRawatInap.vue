@@ -46,7 +46,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item.namarawatinap }}</td>
            <td class="isi-cell">{{ item.isirawatinap }}</td>
-            <td>
+           <td class="gambar-cell">
               <img v-if="item.gambarrawatinap" :src="`${API_URL}/uploads/rawatinap/${item.gambarrawatinap}`" />
             </td>
             <td class="aksi-cell">
