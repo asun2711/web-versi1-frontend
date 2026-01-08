@@ -14,7 +14,7 @@
 import bgImage from '@/assets/images/baground_rsud.jpg';
 
 export default {
-  name: "Admin",
+  name: "DashboardWelcome",
   data() {
     return { bgImage };
   },
@@ -24,16 +24,17 @@ export default {
 <style scoped>
 .dashboard-welcome {
   position: relative;
-  height: 84vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0rem 0.5rem;
+  padding: 0 0.5rem;
 
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
+  background-attachment: scroll;
 
   color: white;
   font-size: 2.5rem;
@@ -49,15 +50,17 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2); /* transparansi 20% */
+  background-color: rgba(0, 0, 0, 0.2);
   pointer-events: none;
   z-index: 0;
 }
 
 .fade-in-up {
   position: relative;
-  z-index: 1; /* agar tampil di atas overlay */
+  z-index: 1;
   animation: fadeInUp 1s ease forwards;
+  max-width: 90%;
+  word-break: break-word;
 }
 
 @keyframes fadeInUp {
@@ -68,6 +71,40 @@ export default {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Media Queries untuk responsif */
+@media screen and (max-width: 1024px) {
+  .dashboard-welcome {
+    font-size: 2.2rem;
+    min-height: 80vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-welcome {
+    font-size: 1.8rem;
+    min-height: 75vh;
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard-welcome {
+    font-size: 1.5rem;
+    min-height: 70vh;
+  }
+  
+  .fade-in-up {
+    max-width: 95%;
+  }
+}
+
+/* Dukungan untuk browser lama */
+@supports not (background-size: cover) {
+  .dashboard-welcome {
+    background-size: 100% 100%;
   }
 }
 </style>

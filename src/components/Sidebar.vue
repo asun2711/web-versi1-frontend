@@ -95,7 +95,8 @@ export default {
   width: 220px;
   background: #19ba7a;
   color: white;
-  height: 100vh;
+  /* PERBAIKAN TINGGI: Menggunakan dvh untuk kompatibilitas mobile */
+  height: 100dvh;
   padding: 1.3rem;
   position: fixed;
   top: 0;
@@ -103,6 +104,8 @@ export default {
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 1000;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .sidebar.open {
@@ -168,5 +171,56 @@ export default {
 .submenu a:hover {
   background-color: rgb(0, 52, 29);
   color: #a3d7a1;
+}
+
+/* Fallback untuk browser yang tidak support dvh */
+@supports not (height: 100dvh) {
+  .sidebar {
+    height: 100vh;
+  }
+}
+
+/* Perbaikan khusus untuk iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .sidebar {
+    height: -webkit-fill-available;
+  }
+}
+
+/* Responsive untuk mobile */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 280px;
+    padding: 1rem;
+  }
+  
+  .menu-item,
+  .sidebar a {
+    padding: 0.5rem 0.75rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .submenu a {
+    min-height: 40px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .menu-item:active {
+    background-color: rgb(0, 52, 29);
+  }
+  
+  .sidebar a:active {
+    background-color: rgb(0, 52, 29);
+    color: #14905e;
+  }
+  
+  .submenu a:active {
+    background-color: rgb(0, 52, 29);
+    color: #a3d7a1;
+  }
 }
 </style>
