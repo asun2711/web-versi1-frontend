@@ -89,7 +89,7 @@ export default {
 .section-content {
   margin: 0 auto;
   padding: 2.5rem clamp(1rem, 5%, 5rem);
-  max-width: 1400px;
+  max-width: 100%;
 }
 
 .section-content h1 {
@@ -109,7 +109,7 @@ export default {
 /* Cards Section */
 .section-cards {
   padding: 3rem clamp(1rem, 5%, 5rem);
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }

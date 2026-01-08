@@ -200,7 +200,7 @@ export default {
 
 .section-content {
   padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 5%, 5rem);
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -222,7 +222,7 @@ export default {
 /* === CARDS SECTION === */
 .section-cards {
   padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 5%, 5rem);
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }

@@ -276,7 +276,7 @@ export default defineComponent({
 /* Container utama */
 .page-wrapper {
   width: 100%;
-  max-width: 1600px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10px;
   box-sizing: border-box;
@@ -678,13 +678,13 @@ export default defineComponent({
 /* Large Desktop (min-width: 1200px) */
 @media (min-width: 1200px) {
   .top-row {
-    max-width: 1400px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
   
   .two-columns {
-    max-width: 1400px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }

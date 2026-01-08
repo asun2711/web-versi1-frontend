@@ -761,13 +761,13 @@ export default defineComponent({
 /* --- Large Desktop Styles (1440px ke atas) --- */
 @media (min-width: 1440px) {
   .top-row {
-    max-width: 1400px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
   
   .two-columns {
-    max-width: 1400px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
