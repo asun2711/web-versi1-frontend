@@ -26,7 +26,7 @@ export default {
 .dashboard-welcome {
   position: relative;
   height: 80vh;
-  min-height: 400px;
+  min-height: 610px;
   display: flex;
   justify-content: center;
   align-items: center;
