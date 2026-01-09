@@ -139,6 +139,7 @@ export interface Perusahaan {
   email: string;
   lokasi: string;
   logoperusahaan?: string | null;
+  iconperusahaan?: string | null;
 }
 
 export interface Radiologi {

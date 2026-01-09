@@ -2,9 +2,60 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>website</title>
+    
+    <!-- Default values -->
+    <title id="dynamic-title">Loading...</title>
+    <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="/SunWeb.ico" />
+    
+    <script>
+      // Fungsi untuk load data perusahaan
+      async function loadCompanyData() {
+        try {
+          // API URL - harus disesuaikan
+          const apiUrl = window.location.origin.includes('localhost') 
+            ? 'http://localhost:3000' 
+            : window.location.origin;
+          
+          const response = await fetch(`${apiUrl}/api/dataperusahaan`);
+          
+          if (response.ok) {
+            const perusahaanList = await response.json();
+            const perusahaan = perusahaanList[0];
+            
+            if (perusahaan) {
+              // Update title
+              document.title = perusahaan.namaperusahaan || 'RSUD';
+              
+              // Update favicon jika ada
+              if (perusahaan.iconperusahaan) {
+                const faviconLink = document.getElementById('dynamic-favicon');
+                if (faviconLink) {
+                  faviconLink.href = `${apiUrl}/uploads/perusahaan/${perusahaan.iconperusahaan}`;
+                  
+                  // Deteksi tipe file
+                  const ext = perusahaan.iconperusahaan.split('.').pop().toLowerCase();
+                  if (ext === 'png') {
+                    faviconLink.type = 'image/png';
+                  } else if (ext === 'jpg' || ext === 'jpeg') {
+                    faviconLink.type = 'image/jpeg';
+                  } else if (ext === 'svg') {
+                    faviconLink.type = 'image/svg+xml';
+                  }
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.log('Gagal load data perusahaan, menggunakan default');
+          document.title = 'RSUD';
+        }
+      }
+      
+      // Jalankan saat halaman load
+      window.addEventListener('DOMContentLoaded', loadCompanyData);
+    </script>
+    
   </head>
   <body>
     <div id="app"></div>

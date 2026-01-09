@@ -12,9 +12,16 @@
       </div>
       <div>
         <label for="logoperusahaan">Logo Perusahaan :</label>
-        <input type="file" id="logoperusahaan" @change="handleFileUpload" accept="image/*" />
+        <input type="file" id="logoperusahaan" @change="handleLogoUpload" accept="image/*" />
         <div v-if="logoPreview" class="preview-container">
           <img :src="logoPreview" alt="Preview Logo" />
+        </div>
+      </div>
+      <div>
+        <label for="iconperusahaan">Icon Perusahaan :</label>
+        <input type="file" id="iconperusahaan" @change="handleIconUpload" accept="image/*" />
+        <div v-if="iconPreview" class="preview-container">
+          <img :src="iconPreview" alt="Preview Icon" />
         </div>
       </div>
       <div>
@@ -61,6 +68,7 @@
             <th>Nama Perusahaan</th>
             <th>Alamat Perusahaan</th>
             <th>Logo Perusahaan</th>
+            <th>Icon Perusahaan</th>
             <th>Telepon Umum</th>
             <th>Telepon Darurat</th>
             <th>Email</th>
@@ -75,6 +83,9 @@
             <td class="alamat-cell">{{ item.alamatperusahaan }}</td>
             <td class="logo-cell">
               <img v-if="item.logoperusahaan" :src="`${API_URL}/uploads/perusahaan/${item.logoperusahaan}`" alt="Logo" />
+            </td>
+            <td class="icon-cell">
+              <img v-if="item.iconperusahaan" :src="`${API_URL}/uploads/perusahaan/${item.iconperusahaan}`" alt="Icon" />
             </td>
             <td class="telepon-cell">{{ item.teleponumum }}</td>
             <td class="telepon-cell">{{ item.telepondarurat }}</td>
@@ -107,6 +118,7 @@ interface PerusahaanForm {
   email: string;
   lokasi: string;
   logoperusahaan?: string | null;
+  iconperusahaan?: string | null;
 }
 
 const formatPhoneNumber = (phone: string): string => {
@@ -130,10 +142,13 @@ export default {
       email: '',
       lokasi: '',
       logoperusahaan: null,
+      iconperusahaan: null,
     });
 
     const logoperusahaan = ref<File | null>(null);
     const logoPreview = ref<string | null>(null);
+    const iconperusahaan = ref<File | null>(null);
+    const iconPreview = ref<string | null>(null);
     const perusahaanList = ref<Perusahaan[]>([]);
     const isEditing = ref(false);
 
@@ -149,7 +164,7 @@ export default {
 
     onMounted(fetchPerusahaan);
 
-    const handleFileUpload = (event: Event) => {
+    const handleLogoUpload = (event: Event) => {
       const target = event.target as HTMLInputElement;
       if (target.files && target.files[0]) {
         const file = target.files[0];
@@ -169,6 +184,26 @@ export default {
       }
     };
 
+    const handleIconUpload = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      if (target.files && target.files[0]) {
+        const file = target.files[0];
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/svg+xml'];
+        if (!allowedTypes.includes(file.type)) {
+          alert('Format file salah! Hanya jpg, jpeg, png, gif, dan svg yang diperbolehkan.');
+          iconperusahaan.value = null;
+          iconPreview.value = form.iconperusahaan ? `${API_URL}/uploads/perusahaan/${form.iconperusahaan}` : null;
+          target.value = '';
+          return;
+        }
+        iconperusahaan.value = file;
+        iconPreview.value = URL.createObjectURL(file);
+      } else {
+        iconperusahaan.value = null;
+        iconPreview.value = form.iconperusahaan ? `${API_URL}/uploads/perusahaan/${form.iconperusahaan}` : null;
+      }
+    };
+
     const formatPhone = (field: keyof Pick<PerusahaanForm, 'teleponumum' | 'telepondarurat'>) => {
       if (form[field]) form[field] = formatPhoneNumber(form[field]);
     };
@@ -182,11 +217,21 @@ export default {
       form.email = '';
       form.lokasi = '';
       form.logoperusahaan = null;
+      form.iconperusahaan = null;
       logoperusahaan.value = null;
+      iconperusahaan.value = null;
+      
       if (logoPreview.value) URL.revokeObjectURL(logoPreview.value);
+      if (iconPreview.value) URL.revokeObjectURL(iconPreview.value);
+      
       logoPreview.value = null;
-      const inputFile = document.getElementById('logoperusahaan') as HTMLInputElement | null;
-      if (inputFile) inputFile.value = '';
+      iconPreview.value = null;
+      
+      const logoInput = document.getElementById('logoperusahaan') as HTMLInputElement | null;
+      const iconInput = document.getElementById('iconperusahaan') as HTMLInputElement | null;
+      if (logoInput) logoInput.value = '';
+      if (iconInput) iconInput.value = '';
+      
       isEditing.value = false;
     };
 
@@ -201,11 +246,12 @@ export default {
         form.telepondarurat = formatPhoneNumber(form.telepondarurat);
 
         for (const [key, value] of Object.entries(form)) {
-          if (value !== null && value !== undefined && key !== 'logoperusahaan') {
+          if (value !== null && value !== undefined && key !== 'logoperusahaan' && key !== 'iconperusahaan') {
             formData.append(key, value as string);
           }
         }
         if (logoperusahaan.value) formData.append('logoperusahaan', logoperusahaan.value);
+        if (iconperusahaan.value) formData.append('iconperusahaan', iconperusahaan.value);
 
         if (isEditing.value && form.id !== null) {
           await perusahaanApi.update(form.id, formData);
@@ -226,10 +272,15 @@ export default {
     const editPerusahaan = (item: Perusahaan) => {
       Object.assign(form, item);
       logoPreview.value = item.logoperusahaan ? `${API_URL}/uploads/perusahaan/${item.logoperusahaan}` : null;
+      iconPreview.value = item.iconperusahaan ? `${API_URL}/uploads/perusahaan/${item.iconperusahaan}` : null;
       logoperusahaan.value = null;
+      iconperusahaan.value = null;
       isEditing.value = true;
-      const inputFile = document.getElementById('logoperusahaan') as HTMLInputElement | null;
-      if (inputFile) inputFile.value = '';
+      
+      const logoInput = document.getElementById('logoperusahaan') as HTMLInputElement | null;
+      const iconInput = document.getElementById('iconperusahaan') as HTMLInputElement | null;
+      if (logoInput) logoInput.value = '';
+      if (iconInput) iconInput.value = '';
     };
 
     const deletePerusahaan = async (id: number) => {
@@ -250,9 +301,12 @@ export default {
       form,
       logoperusahaan,
       logoPreview,
+      iconperusahaan,
+      iconPreview,
       perusahaanList,
       isEditing,
-      handleFileUpload,
+      handleLogoUpload,
+      handleIconUpload,
       handleSubmit,
       editPerusahaan,
       deletePerusahaan,
@@ -367,17 +421,24 @@ td {
   word-break: break-word;
 }
 
-.logo-cell {
+.logo-cell,
+.icon-cell {
   width: 80px;
   text-align: center;
 }
 
-.logo-cell img {
+.logo-cell img,
+.icon-cell img {
   max-width: 120px;
   max-height: 100px;
   object-fit: cover;
   border-radius: 4px;
   border: 1px solid #eee;
+}
+
+.icon-cell img {
+  max-width: 80px;
+  max-height: 80px;
 }
 
 .aksi-cell {
@@ -428,8 +489,8 @@ tr:hover {
     max-width: 120px;
   }
 }
-/* ===== JUSTIFY ISI TABEL PERUSAHAAN ===== */
 
+/* ===== JUSTIFY ISI TABEL PERUSAHAAN ===== */
 .nama-cell,
 .alamat-cell,
 .telepon-cell,
@@ -443,8 +504,8 @@ tr:hover {
 /* Kolom non-teks */
 .id-cell,
 .logo-cell,
+.icon-cell,
 .aksi-cell {
   text-align: center;
 }
-
 </style>
