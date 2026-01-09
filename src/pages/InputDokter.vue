@@ -49,28 +49,28 @@
         <thead>
           <tr>
             <th class="id-cell">ID</th>
-            <th>Nama Dokter</th>
-            <th>Gelar Dokter</th>
-            <th>Spesialis</th>
-            <th>Jadwal Dokter</th>
-            <th>Gambar Dokter</th>
-            <th>STR</th>
-            <th>SIP</th>
+            <th class="nama-cell">Nama Dokter</th>
+            <th class="gelar-cell">Gelar Dokter</th>
+            <th class="spesialis-cell">Spesialis</th>
+            <th class="jadwal-cell">Jadwal Dokter</th>
+            <th class="gambar-header">Gambar Dokter</th>
+            <th class="str-cell">STR</th>
+            <th class="sip-cell">SIP</th>
             <th class="aksi-cell">Aksi</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in dokterList" :key="item.id">
             <td class="wrap-text id-cell">{{ item.id }}</td>
-            <td class="wrap-text-pre">{{ item.namadokter }}</td>
-            <td class="wrap-text-pre">{{ item.gelardokter }}</td>
-            <td class="wrap-text">{{ item.spesialis?.judulspesialis || '-' }}</td>
-            <td class="wrap-text-pre">{{ item.jadwaldokter }}</td>
+            <td class="wrap-text-pre nama-cell">{{ item.namadokter }}</td>
+            <td class="wrap-text-pre gelar-cell">{{ item.gelardokter }}</td>
+            <td class="wrap-text spesialis-cell">{{ item.spesialis?.judulspesialis || '-' }}</td>
+            <td class="wrap-text-pre jadwal-cell">{{ item.jadwaldokter }}</td>
             <td class="gambar-cell">
               <img v-if="item.gambardokter" :src="`${API_URL}/uploads/dokter/${item.gambardokter}`" alt="Gambar" />
             </td>
-            <td class="wrap-text-pre">{{ item.sertifikatstrdokter }}</td>
-            <td class="wrap-text-pre">{{ item.sertifikatsipdokter }}</td>
+            <td class="wrap-text-pre str-cell">{{ item.sertifikatstrdokter }}</td>
+            <td class="wrap-text-pre sip-cell">{{ item.sertifikatsipdokter }}</td>
             <td class="aksi-cell">
               <div class="action-buttons">
                 <button @click="editDokter(item)" class="btn-edit">Edit</button>
@@ -258,7 +258,9 @@ export default {
 
 <style scoped>
 .input-dokter-page {
-  padding: 1rem;
+  padding: 1.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 input,
@@ -267,14 +269,25 @@ select {
   display: block;
   width: 100%;
   margin-bottom: 1rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
   box-sizing: border-box;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+select {
+  background-color: white;
+  cursor: pointer;
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border: none;
   color: white;
   border-radius: 6px;
@@ -312,65 +325,101 @@ button {
 
 .preview-container img {
   max-width: 200px;
+  max-height: 150px;
   margin-top: 10px;
   border: 1px solid #ddd;
   padding: 4px;
   border-radius: 4px;
+  object-fit: contain;
 }
 
 .table-responsive {
   overflow-x: auto;
   margin-top: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: white;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  min-width: 1000px;
 }
 
 th,
 td {
-  padding: 0.75rem 0.5rem;
+  padding: 1rem 0.75rem;
   border: 1px solid #e0e0e0;
   text-align: left;
-  font-size: 14px;
+  font-size: 15px;
   vertical-align: top;
   word-break: break-word;
-  white-space: normal;
 }
 
-.wrap-text-pre {
-  white-space: pre-wrap; /* menampilkan enter/line break dari textarea */
-  word-break: break-word;
-}
-
+/* Kolom Lebar yang Diperbaiki */
 .id-cell {
-  width: 40px;
+  width: 20px;
+  text-align: center;
+}
+
+.nama-cell {
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.gelar-cell {
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.spesialis-cell {
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.jadwal-cell {
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.gambar-header {
+  min-width: 150px;
 }
 
 .gambar-cell img {
-  max-width: 120px;
+  max-width: 150px;
   max-height: 100px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #eee;
+  display: block;
+}
+
+.str-cell {
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.sip-cell {
+  min-width: 150px;
+  max-width: 150px;
 }
 
 .aksi-cell {
-  width: 150px;
+  width: 200px;
+  min-width: 120px;
 }
 
 .action-buttons {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 
 .action-buttons button {
-  padding: 0.25rem 0.5rem;
-  font-size: 12px;
+  padding: 0.5rem 0.75rem;
+  font-size: 13px;
   margin-right: 0;
   flex: 1;
 }
@@ -385,29 +434,139 @@ th {
 }
 
 tr:hover {
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
 }
-
-@media (max-width: 768px) {
-  th,
-  td {
-    padding: 0.5rem 0.25rem;
-    font-size: 13px;
-  }
-}
-/* ====== JUSTIFY KHUSUS ISI TABEL DOKTER ====== */
 
 .wrap-text,
 .wrap-text-pre {
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
-/* Kolom non-teks */
-.id-cell,
-.aksi-cell {
-  text-align: center;
+.wrap-text-pre {
+  white-space: pre-wrap;
 }
 
+@media (max-width: 1024px) {
+  table {
+    min-width: 900px;
+  }
+  
+  th,
+  td {
+    padding: 0.875rem 0.625rem;
+    font-size: 14.5px;
+  }
+}
+
+/* =================== MOBILE STYLES =================== */
+@media (max-width: 768px) {
+  .input-dokter-page {
+    padding: 1rem;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 0.65rem;
+    font-size: 14px;
+  }
+
+  table {
+    min-width: 800px;
+  }
+
+  th,
+  td {
+    padding: 0.75rem 0.5rem;
+    font-size: 14px;
+  }
+
+  /* PERUBAHAN UTAMA: Kolom aksi lebih lebar dan tombol lebih jelas */
+  .aksi-cell {
+    width: 200px;
+    min-width: 140px;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .action-buttons button {
+    padding: 0.4rem 0.6rem;
+    font-size: 12.5px;
+    margin-right: 0;
+    flex: 1;
+    min-width: 65px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  /* Ukuran kolom lainnya disesuaikan untuk mobile */
+  .nama-cell {
+    min-width: 120px;
+    max-width: 120px;
+  }
+
+  .gelar-cell {
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+  .spesialis-cell {
+    min-width: 100px;
+    max-width: 100px;
+  }
+
+  .str-cell,
+  .sip-cell {
+    min-width: 120px;
+    max-width: 120px;
+  }
+
+  .gambar-cell img {
+    max-width: 120px;
+    max-height: 80px;
+  }
+}
+
+/* =================== MOBILE SANGAT KECIL =================== */
+@media (max-width: 480px) {
+  th,
+  td {
+    padding: 0.6rem 0.4rem;
+    font-size: 13.5px;
+  }
+
+  .aksi-cell {
+    min-width: 130px;
+  }
+
+  .action-buttons button {
+    padding: 0.35rem 0.5rem;
+    font-size: 12px;
+    min-width: 60px;
+  }
+
+  .nama-cell {
+    min-width: 110px;
+    max-width: 110px;
+  }
+
+  .gelar-cell {
+    min-width: 70px;
+    max-width: 70px;
+  }
+
+  .spesialis-cell {
+    min-width: 100px;
+    max-width: 100px;
+  }
+}
 </style>
