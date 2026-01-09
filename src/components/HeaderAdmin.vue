@@ -8,7 +8,9 @@
             class="menu-icon"
             v-if="!sidebarOpen"
             @click.prevent="$emit('toggle-sidebar')"
-          >☰</a>
+          >
+            <i class="fas fa-bars"></i>
+          </a>
         </li>
       </ul>
 
@@ -24,9 +26,9 @@
       <ul class="menu-right">
         <li class="notification-icon" style="position: relative;">
           <a href="#" class="menu-icon icon-hover" @click.prevent="toggleNotification">
-            🔔
+            <i class="fas fa-bell"></i>
             <span v-if="unreadMessages > 0" class="notification-badge">
-              {{ unreadMessages }}
+              {{ unreadMessages > 9 ? '9+' : unreadMessages }}
             </span>
           </a>
           <ul v-if="notificationOpen" class="submenu submenu-left" @click.stop>
@@ -38,15 +40,19 @@
         </li>
 
         <li class="dropdown" style="position: relative;">
-          <a href="#" class="menu-icon icon-hover" @click.prevent="toggleSettings">⚙</a>
+          <a href="#" class="menu-icon icon-hover" @click.prevent="toggleSettings">
+            <i class="fas fa-cog"></i>
+          </a>
           <ul v-if="settingsOpen" class="submenu submenu-left" @click.stop>
-            <li><RouterLink to="/settings/password">Password</RouterLink></li>
-            <li><RouterLink to="/settings/theme">Tema</RouterLink></li>
+            <li><RouterLink to="/settings/password"><i class="fas fa-key"></i> Password</RouterLink></li>
+            <li><RouterLink to="/settings/theme"><i class="fas fa-palette"></i> Tema</RouterLink></li>
           </ul>
         </li>
 
         <li class="dropdown" style="position: relative;">
-          <a href="#" class="menu-icon icon-hover" @click.prevent="toggleLogout">⏻</a>
+          <a href="#" class="menu-icon icon-hover" @click.prevent="toggleLogout">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
           <ul v-if="logoutOpen" class="submenu submenu-left logout-menu" @click.stop>
             <li class="avatar-container">
               <img
@@ -57,7 +63,7 @@
             </li>
             <li>
               <button class="logout-button" @click="handleLogout">
-                Logout
+                <i class="fas fa-sign-out-alt"></i> Logout
               </button>
             </li>
           </ul>
@@ -180,6 +186,9 @@ export default {
 </script>
 
 <style scoped>
+/* Tambahkan Font Awesome di index.html atau main.ts */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
 .HeaderAdmin {
   background: white;
   padding: 1rem 0rem 2rem 0rem;
@@ -213,16 +222,17 @@ export default {
 }
 
 .menu-icon {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   user-select: none;
-  transition: color 0.3s, transform 0.3s;
-  display: inline-block;
+  transition: color 0.3s, transform 0.3s, background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 44px;
   min-height: 44px;
-  line-height: 44px;
-  text-align: center;
-  border-radius: 4px;
+  border-radius: 8px;
+  color: #555;
 }
 
 .menu-icon:focus {
@@ -232,7 +242,7 @@ export default {
 
 .icon-hover:hover {
   color: #03ce7d;
-  transform: scale(1.2);
+  transform: scale(1.1);
   background-color: rgba(3, 206, 125, 0.1);
 }
 
@@ -262,11 +272,11 @@ export default {
   margin-top: 8px;
   background: white;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   list-style: none;
   padding: 0.5rem 0;
-  min-width: 150px;
+  min-width: 180px;
   z-index: 1000;
 }
 
@@ -277,24 +287,35 @@ export default {
 
 .submenu li {
   padding: 0.5rem 1rem;
+  transition: background-color 0.2s;
 }
 
 .submenu li:hover {
-  background-color: #03ce7d;
+  background-color: #f0f9ff;
 }
 
 .submenu li a {
-  color: #000;
+  color: #333;
   text-decoration: none;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  padding: 0.4rem 0;
 }
 
 .submenu li a:hover {
-  color: white;
+  color: #03ce7d;
+}
+
+.submenu li a i {
+  width: 20px;
+  text-align: center;
+  color: #666;
 }
 
 .logout-menu {
-  min-width: 180px;
+  min-width: 200px;
   text-align: center;
   padding: 1rem;
 }
@@ -309,24 +330,33 @@ export default {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #03ce7d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .logout-button {
-  background-color: #03ce7d;
+  background: linear-gradient(135deg, #03ce7d, #02b56a);
   border: none;
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.7rem 1.5rem;
   border-radius: 24px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  transition: all 0.3s;
   width: 100%;
   margin-top: 0.5rem;
   min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(3, 206, 125, 0.3);
 }
 
 .logout-button:hover {
-  background-color: #029e56;
+  background: linear-gradient(135deg, #02b56a, #029e56);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(3, 206, 125, 0.4);
 }
 
 .logout-button:focus {
@@ -335,20 +365,22 @@ export default {
 }
 
 .notification-badge {
-  background-color: red;
+  background: linear-gradient(135deg, #ff4757, #ff3838);
   color: white;
-  font-size: 0.7rem;
-  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: bold;
+  border-radius: 10px;
   padding: 0.15rem 0.4rem;
   position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
+  top: 5px;
+  right: 5px;
   min-width: 18px;
   height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive untuk berbagai platform */
@@ -372,10 +404,9 @@ export default {
   }
   
   .menu-icon {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     min-width: 40px;
     min-height: 40px;
-    line-height: 40px;
   }
   
   .avatar {
@@ -401,8 +432,16 @@ export default {
     position: absolute;
     top: 100%;
     bottom: auto;
-    border-radius: 4px;
+    border-radius: 8px;
     max-height: none;
+  }
+  
+  .notification-badge {
+    top: 3px;
+    right: 3px;
+    font-size: 0.6rem;
+    min-width: 16px;
+    height: 16px;
   }
 }
 
@@ -417,11 +456,19 @@ export default {
     margin: 0 0.25rem;
   }
   
+  .menu-icon {
+    font-size: 1.1rem;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  
   .notification-badge {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     padding: 0.1rem 0.3rem;
-    min-width: 16px;
-    height: 16px;
+    min-width: 14px;
+    height: 14px;
+    top: 2px;
+    right: 2px;
   }
 }
 
@@ -430,7 +477,7 @@ export default {
   .menu-icon {
     min-width: 48px;
     min-height: 48px;
-    line-height: 48px;
+    font-size: 1.4rem;
   }
   
   .submenu li {
@@ -439,6 +486,43 @@ export default {
   
   .logout-button {
     min-height: 48px;
+    padding: 0.8rem 1.5rem;
   }
+}
+
+/* Animasi untuk icon bell saat ada notifikasi */
+@keyframes bell-ring {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-15deg); }
+  20% { transform: rotate(15deg); }
+  30% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.fa-bell {
+  transition: transform 0.3s;
+}
+
+.notification-icon:hover .fa-bell {
+  animation: bell-ring 0.5s ease-in-out;
+}
+
+/* Warna khusus untuk setiap icon */
+.fa-bars {
+  color: #333;
+}
+
+.fa-bell {
+  color: #666;
+}
+
+.fa-cog {
+  color: #666;
+}
+
+.fa-sign-out-alt {
+  color: #666;
 }
 </style>

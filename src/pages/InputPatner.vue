@@ -309,8 +309,8 @@ td {
 }
 
 .aksi-cell {
-  width: 160px;
-  min-width: 120px;
+  width: 180px;
+  min-width: 180px;
 }
 
 .action-buttons {
