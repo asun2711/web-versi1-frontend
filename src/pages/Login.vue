@@ -12,8 +12,7 @@
             :disabled="isLocked"
             placeholder="Username"
             autocomplete="username"
-            required
-          />
+            required/>
           <transition name="fade">
             <small v-if="usernameError" class="error-msg">{{ usernameError }}</small>
           </transition>
@@ -30,16 +29,14 @@
               placeholder="Password"
               autocomplete="current-password"
               minlength="8"
-              required
-            />
+              required/>
             <button
               type="button"
               class="toggle-password"
               @click="togglePassword"
               :aria-label="showPassword ? 'Hide password' : 'Show password'"
               :class="{ active: showPassword }"
-              :disabled="isLocked"
-            >
+              :disabled="isLocked">
               <svg v-if="showPassword" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17.94 17.94a10 10 0 0 1-13.88-13.88"/>
                 <path d="M1 1l22 22"/>
@@ -70,8 +67,7 @@
             :disabled="isLocked"
             autocomplete="off"
             placeholder="Type the text displayed"
-            required
-          />
+            required/>
           <transition name="fade">
             <small v-if="captchaError" class="error-msg">{{ captchaError }}</small>
           </transition>
@@ -125,7 +121,7 @@ export default defineComponent({
     const captchaVerified = ref(false);
     const captchaImageUrl = ref('');
 
-    const lockDuration = 300; // 5 minutes lock time
+    const lockDuration = 300;
     const lockTimeLeft = ref(lockDuration);
     let lockTimer: number | undefined;
 
@@ -178,7 +174,9 @@ export default defineComponent({
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let captcha = '';
       for (let i = 0; i < 5; i++) {
-        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        const char = chars.charAt(randomIndex);
+        captcha += char;
       }
       const canvas = document.createElement('canvas');
       canvas.width = 120;
@@ -281,154 +279,280 @@ export default defineComponent({
 
 <style scoped>
 .login-wrapper {
-  height: 100vh;
+  min-height: 95vh;
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
-  background-color: #f5f7fa; /* optional background */
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
 }
+
+.login-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(100px, 100px) rotate(360deg); }
+}
+
 .login-section {
   max-width: 380px;
   width: 100%;
-  padding: 2rem;
-  border-radius: 14px;
-  box-shadow: 0 0 10px #ddd;
-  background-color: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0; /* important to avoid margin offset */
+  animation: fadeIn 0.6s ease-out;
 }
 
-/* berikut gaya input dan styling lain sama seperti sebelumnya */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .form-group,
 .password-group,
 .captcha-group {
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
+
+.input-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
 input[type='text'],
 input[type='password'] {
   width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: 1.5px solid #b0c4de;
-  border-radius: 6px;
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-input:focus {
-  border-color: #1e90ff;
+  transition: all 0.2s ease;
+  background: #f8fafc;
+  color: #1e293b;
   outline: none;
 }
+
+input:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
 .error-msg {
-  color: #e74c3c;
+  color: #dc2626;
   font-size: 0.85rem;
   margin-top: 0.3rem;
-  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
 }
+
 .error-group input {
-  border-color: #e74c3c;
-  background-color: #fff0f0;
+  border-color: #dc2626;
+  background: #fef2f2;
 }
+
 .password-group input {
   padding-right: 3.5rem;
 }
+
+.password-input-wrapper {
+  position: relative;
+}
+
 .toggle-password {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
   border: none;
   background: none;
-  color: #3498db;
+  color: #94a3b8;
   cursor: pointer;
   user-select: none;
   padding: 0;
   display: flex;
   align-items: center;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
+
 .toggle-password:hover,
 .toggle-password.active {
-  color: #104e8b;
+  color: #667eea;
 }
+
 .captcha-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
 }
+
 .captcha-image {
   width: 120px;
   height: 40px;
   border: 1px solid #ddd;
   border-radius: 7px;
   user-select: none;
+  flex: 1;
 }
+
 .refresh-captcha {
-  margin-left: 0.5rem;
-  padding: 4px 10px;
-  background-color: #eeeeee;
-  border: none;
+  padding: 0.5rem;
+  background-color: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 6px;
-  transition: background-color 0.25s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .refresh-captcha:hover {
-  background-color: #cccccc;
+  background-color: #667eea;
+  border-color: #667eea;
+  color: white;
 }
+
 button[type='submit'] {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #1e90ff;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   color: white;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 7px;
-  transition: background-color 0.25s ease;
+  border-radius: 10px;
+  transition: all 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 }
+
+button[type='submit']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
 button[type='submit']:hover:not(:disabled) {
-  background-color: #104e8b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
+
+button[type='submit']:hover:not(:disabled)::before {
+  left: 100%;
+}
+
 button[type='submit']:disabled {
-  background-color: #a0cdfc;
+  background: #cbd5e1;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
+
 .form-error,
 .lock-message {
   margin-top: 1.1rem;
-  color: #e74c3c;
+  color: #dc2626;
   text-align: center;
   font-weight: 600;
   font-size: 1.05rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #fef2f2;
+  border: 2px solid #fecaca;
 }
+
+.lock-message {
+  background: #fffbeb;
+  border: 2px solid #fde68a;
+  color: #d97706;
+}
+
 .lock-message strong {
-  color: #1e90ff;
+  color: #667eea;
 }
+
 .remember-me {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
+
 .remember-me label {
   margin-left: 0.4rem;
   font-weight: 500;
-  color: #333;
+  color: #475569;
+  font-size: 0.9rem;
 }
+
 .required {
-  color: #e74c3c;
+  color: #dc2626;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
 .loading-spinner {
   border: 2px solid transparent;
   border-top: 2px solid #fff;
@@ -439,9 +563,87 @@ button[type='submit']:disabled {
   margin-right: 8px;
   animation: spin 0.75s linear infinite;
 }
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+@media (max-width: 480px) {
+  .login-section {
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-section h2 {
+    font-size: 1.75rem;
+  }
+  
+  .captcha-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .refresh-captcha {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .login-section {
+    background: #1e293b;
+    border-color: #334155;
+  }
+  
+  .login-section h2 {
+    color: #f1f5f9;
+  }
+  
+  input[type='text'],
+  input[type='password'] {
+    background: #334155;
+    border-color: #475569;
+    color: #f1f5f9;
+  }
+  
+  input:focus {
+    background: #1e293b;
+  }
+  
+  .remember-me label {
+    color: #cbd5e1;
   }
 }
 </style>
