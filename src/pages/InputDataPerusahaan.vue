@@ -24,8 +24,7 @@
           type="tel"
           v-model="form.teleponumum"
           placeholder="+62 823 XXXX XXXX"
-          @input="formatPhone('teleponumum')"
-        />
+          @input="formatPhone('teleponumum')"/>
       </div>
       <div>
         <label for="telepondarurat">Telepon Darurat :</label>
@@ -34,8 +33,7 @@
           type="tel"
           v-model="form.telepondarurat"
           placeholder="+62 823 XXXX XXXX"
-          @input="formatPhone('telepondarurat')"
-        />
+          @input="formatPhone('telepondarurat')"/>
       </div>
       <div>
         <label for="email">Email :</label>

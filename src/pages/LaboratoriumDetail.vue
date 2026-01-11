@@ -9,8 +9,7 @@
             :key="tab.name"
             :to="tab.link"
             class="tab-item"
-            :class="{ active: isActiveTab(tab.link) }"
-          >
+            :class="{ active: isActiveTab(tab.link) }">
             {{ tab.name }}
           </router-link>
         </div>
@@ -32,8 +31,7 @@
             class="berita-img"
             :src="imageSrc"
             :alt="titleText"
-            @click="openOverlay(imageSrc)"
-          />
+            @click="openOverlay(imageSrc)"/>
           <h1 class="judul-berita">{{ titleText }}</h1>
           <p class="berita-desc-full">{{ bodyText }}</p>
         </div>

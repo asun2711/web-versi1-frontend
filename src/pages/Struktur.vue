@@ -12,14 +12,12 @@
         <div class="card" v-for="item in strukturList" :key="item.id">
           <div
             class="card-img-wrapper"
-            @click="openImageModal(item.gambardireksi ? `${API_URL}/uploads/struktur/${item.gambardireksi}` : '')"
-          >
+            @click="openImageModal(item.gambardireksi ? `${API_URL}/uploads/struktur/${item.gambardireksi}` : '')">
             <img
               v-if="item.gambardireksi"
               :src="`${API_URL}/uploads/struktur/${item.gambardireksi}`"
               :alt="item.namadireksi"
-              class="card-img"
-            />
+              class="card-img"/>
           </div>
           <h3 class="card-title">
             {{ item.namadireksi }}{{ item.gelardireksi ? '' + item.gelardireksi : '' }}

@@ -7,8 +7,7 @@
             href="#"
             class="menu-icon"
             v-if="!sidebarOpen"
-            @click.prevent="$emit('toggle-sidebar')"
-          >
+            @click.prevent="$emit('toggle-sidebar')">
             <i class="fas fa-bars"></i>
           </a>
         </li>
@@ -17,8 +16,7 @@
       <!-- Logo -->
       <RouterLink
         :to="{ name: 'Admin' }"
-        :class="['logo', { 'logo-shifted': sidebarOpen }]"
-      >
+        :class="['logo', { 'logo-shifted': sidebarOpen }]">
         <img v-if="logoHeader" :src="logoHeader" alt="Logo RSUD" />
         <span v-else>RSUD</span>
       </RouterLink>

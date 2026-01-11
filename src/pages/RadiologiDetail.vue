@@ -9,8 +9,7 @@
             :key="tab.name"
             :to="tab.link"
             class="tab-item"
-            :class="{ active: isActiveTab(tab.link) }"
-          >
+            :class="{ active: isActiveTab(tab.link) }">
             {{ tab.name }}
           </router-link>
         </div>
@@ -33,8 +32,7 @@
             class="berita-img"
             :src="imageSrc"
             :alt="titleText"
-            @click="openOverlay(imageSrc)"
-          />
+            @click="openOverlay(imageSrc)"/>
           <h1 class="judul-berita">{{ titleText }}</h1>
           <p class="berita-desc-full">{{ bodyText }}</p>
         </div>
@@ -59,8 +57,7 @@
               class="sub-card"
               v-for="item in latestRawatJalan"
               :key="`rj-${item.id}`"
-              @click="goToDetail('rawatjalan', item.id)"
-            >
+              @click="goToDetail('rawatjalan', item.id)">
               <span class="kategori">Rawat Jalan</span>
               <h4 class="sub-card-title">{{ item.namarawatjalan }}</h4>
               <p class="sub-card-desc">{{ (item.isirawatjalan || '').substring(0, 80) }}...</p>
@@ -70,8 +67,7 @@
               class="sub-card"
               v-for="item in latestRawatInap"
               :key="`ri-${item.id}`"
-              @click="goToDetail('rawatinap', item.id)"
-            >
+              @click="goToDetail('rawatinap', item.id)">
               <span class="kategori">Rawat Inap</span>
               <h4 class="sub-card-title">{{ item.namarawatinap }}</h4>
               <p class="sub-card-desc">{{ (item.isirawatinap || '').substring(0, 80) }}...</p>
@@ -81,8 +77,7 @@
               class="sub-card"
               v-for="item in latestIGD"
               :key="`igd-${item.id}`"
-              @click="goToDetail('rawatigd', item.id)"
-            >
+              @click="goToDetail('rawatigd', item.id)">
               <span class="kategori">IGD</span>
               <h4 class="sub-card-title">{{ item.namaigd }}</h4>
               <p class="sub-card-desc">{{ (item.isiigd || '').substring(0, 80) }}...</p>
@@ -92,8 +87,7 @@
               class="sub-card"
               v-for="item in latestLab"
               :key="`lab-${item.id}`"
-              @click="goToDetail('lab', item.id)"
-            >
+              @click="goToDetail('lab', item.id)">
               <span class="kategori">Laboratorium</span>
               <h4 class="sub-card-title">{{ item.namalaboratorium }}</h4>
               <p class="sub-card-desc">{{ (item.isilaboratorium || '').substring(0, 80) }}...</p>
@@ -103,8 +97,7 @@
               class="sub-card"
               v-for="item in latestRadiologi"
               :key="`rad-${item.id}`"
-              @click="goToDetail('radiologi', item.id)"
-            >
+              @click="goToDetail('radiologi', item.id)">
               <span class="kategori">Radiologi</span>
               <h4 class="sub-card-title">{{ item.namaradiologi }}</h4>
               <p class="sub-card-desc">{{ (item.isiradiologi || '').substring(0, 80) }}...</p>
@@ -114,8 +107,7 @@
               class="sub-card"
               v-for="item in latestMcu"
               :key="`mcu-${item.id}`"
-              @click="goToDetail('mcu', item.id)"
-            >
+              @click="goToDetail('mcu', item.id)">
               <span class="kategori">MCU</span>
               <h4 class="sub-card-title">{{ item.namamcu }}</h4>
               <p class="sub-card-desc">{{ (item.isimcu || '').substring(0, 80) }}...</p>

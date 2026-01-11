@@ -55,8 +55,7 @@
               <img
                 v-if="item.gambarsejarah"
                 :src="`${API_URL}/uploads/sejarah/${item.gambarsejarah}`"
-                alt="Gambar Sejarah"
-              />
+                alt="Gambar Sejarah"/>
             </td>
             <td>{{ item.visi }}</td>
             <td>{{ item.misi }}</td>

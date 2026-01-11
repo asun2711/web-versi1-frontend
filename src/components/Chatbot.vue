@@ -29,8 +29,7 @@
             <input
               v-model="input"
               placeholder="Tanya dokter, spesialis, IGD..."
-              @keyup.enter="send"
-            />
+              @keyup.enter="send"/>
             <button @click="send">Kirim</button>
           </div>
         </div>

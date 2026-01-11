@@ -17,8 +17,7 @@
         class="slider-area"
         v-if="activeKonten"
         @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
-      >
+        @mouseleave="onMouseLeave">
         <div class="slider-card">
           <h2>{{ activeKonten.namakontensosial }}</h2>
           <p class="slider-username">{{ activeKonten.kontenusername }}</p>
@@ -27,8 +26,8 @@
             <!-- HTML Widget -->
             <div
               v-if="getContentType(activeKonten.isikonten) === 'html'"
-              v-html="activeKonten.isikonten"
-            ></div>
+              v-html="activeKonten.isikonten">
+            </div>
 
             <!-- YouTube -->
             <iframe
@@ -39,8 +38,8 @@
               height="400"
               frameborder="0"
               allowfullscreen
-              style="border-radius:1rem;"
-            ></iframe>
+              style="border-radius:1rem;">
+            </iframe>
 
             <!-- Facebook -->
             <iframe
@@ -51,22 +50,21 @@
               height="400"
               frameborder="0"
               allowfullscreen
-              style="border-radius:1rem;"
-            ></iframe>
+              style="border-radius:1rem;">
+            </iframe>
 
             <!-- Instagram LightWidget -->
             <div
               v-else-if="getContentType(activeKonten.isikonten) === 'instagram'"
-              v-html="activeKonten.isikonten"
-            ></div>
+              v-html="activeKonten.isikonten">
+            </div>
 
             <!-- Gambar -->
             <img
               v-else-if="getContentType(activeKonten.isikonten) === 'image'"
               :src="activeKonten.isikonten || ''"
               :alt="activeKonten.namakontensosial"
-              style="max-width:100%; border-radius:1rem; margin-top:1rem;"
-            />
+              style="max-width:100%; border-radius:1rem; margin-top:1rem;"/>
 
             <!-- Teks fallback -->
             <p v-else>{{ activeKonten.isikonten }}</p>
@@ -80,12 +78,10 @@
           class="mini-card"
           v-for="item in socials"
           :key="item.id"
-          @click="openLink(item.link)"
-        >
+          @click="openLink(item.link)">
           <img
             :src="`${API_URL}/uploads/sosialmedia/${item.iconsosialmedia || ''}`"
-            :alt="item.namasosialmedia"
-          />
+            :alt="item.namasosialmedia"/>
           <div>
             <h3>{{ item.namasosialmedia }}</h3>
             <span>{{ item.username }}</span>

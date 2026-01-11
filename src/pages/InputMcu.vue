@@ -58,8 +58,7 @@
               <img
                 v-if="item.gambarmcu"
                 :src="`${API_URL}/uploads/mcu/${item.gambarmcu}`"
-                alt="Gambar"
-              />
+                alt="Gambar"/>
             </td>
 
             <td class="aksi-cell">

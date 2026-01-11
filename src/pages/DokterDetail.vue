@@ -17,8 +17,7 @@
           class="card"
           tabindex="0"
           role="article"
-          :aria-label="`Dokter ${dokter.namadokter} ${dokter.spesialis?.judulspesialis || ''}`"
-        >
+          :aria-label="`Dokter ${dokter.namadokter} ${dokter.spesialis?.judulspesialis || ''}`">
           <!-- KOLOM KIRI: FOTO + NAMA + SPESIALIS -->
           <div class="card-left">
             <!-- Foto Dokter -->
@@ -30,22 +29,19 @@
               @keydown.space="openImageModal(apiBase + dokter.gambardokter)"
               role="button"
               tabindex="0"
-              :aria-label="`Buka foto ${dokter.namadokter}`"
-            >
+              :aria-label="`Buka foto ${dokter.namadokter}`">
               <img
                 :src="apiBase + dokter.gambardokter"
                 :alt="`Foto ${dokter.namadokter}`"
                 class="card-img"
                 loading="lazy"
-                decoding="async"
-              />
+                decoding="async"/>
             </div>
             <div 
               v-else 
               class="card-img-placeholder" 
               role="img" 
-              aria-label="Tidak ada foto dokter"
-            >
+              aria-label="Tidak ada foto dokter">
               👨‍⚕️
             </div>
 
@@ -64,8 +60,7 @@
                 v-for="(row, idx) in parseJadwal(dokter.jadwaldokter)"
                 :key="idx"
                 class="jadwal-row"
-                role="row"
-              >
+                role="row">
                 <span class="jadwal-hari" role="cell">{{ row.hari }}</span>
                 <span class="jadwal-jam" role="cell">{{ row.jam }}</span>
               </div>
@@ -96,12 +91,10 @@
       role="dialog"
       aria-modal="true"
       aria-label="Modal foto dokter"
-      @keydown.esc="closeImageModal"
-    >
+      @keydown.esc="closeImageModal">
       <img 
         :src="modalImage" 
-        alt="Foto dokter ukuran penuh" 
-      />
+        alt="Foto dokter ukuran penuh" />
       <span 
         class="modal-close" 
         @click="closeImageModal"
@@ -109,8 +102,7 @@
         @keydown.space="closeImageModal"
         role="button"
         tabindex="0"
-        aria-label="Tutup modal"
-      >
+        aria-label="Tutup modal">
         &times;
       </span>
     </div>

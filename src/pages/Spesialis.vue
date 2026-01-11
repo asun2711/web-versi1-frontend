@@ -20,15 +20,13 @@
           tabindex="0"
           @keydown.enter="goToDokter(item.id)"
           @keydown.space="goToDokter(item.id)"
-          aria-label="Lihat dokter spesialis {{ item.judulspesialis }}"
-        >
+          aria-label="Lihat dokter spesialis {{ item.judulspesialis }}">
           <img
             v-if="item.gambarspesialis"
             :src="apiBase + item.gambarspesialis"
             :alt="item.judulspesialis"
             class="card-img"
-            loading="lazy"
-          />
+            loading="lazy"/>
           <span class="card-title">{{ item.judulspesialis }}</span>
         </div>
       </div>

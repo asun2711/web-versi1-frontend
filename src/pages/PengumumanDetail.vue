@@ -37,8 +37,7 @@
             class="pengumuman-img"
             :src="`${API_URL}/uploads/pengumuman/${pengumuman.gambarpengumuman}`"
             :alt="pengumuman.judulpengumuman"
-            @click="openOverlay(pengumuman.gambarpengumuman)"
-          />
+            @click="openOverlay(pengumuman.gambarpengumuman)"/>
 
           <h1 class="judul-pengumuman">{{ pengumuman.judulpengumuman }}</h1>
           <p class="pengumuman-desc-full">{{ pengumuman.isipengumuman }}</p>
@@ -64,8 +63,7 @@
               class="sub-card"
               v-for="item in latestBerita"
               :key="`berita-${item.id}`"
-              @click="goToDetail('berita', item.id)"
-            >
+              @click="goToDetail('berita', item.id)">
               <span class="kategori">{{ item.kategori }}</span>
               <h4 class="sub-card-title">{{ item.judulberita }}</h4>
               <p class="sub-card-desc">{{ item.isiberita.substring(0, 80) }}...</p>
@@ -76,8 +74,7 @@
               class="sub-card"
               v-for="item in latestPengumuman"
               :key="`pengumuman-${item.id}`"
-              @click="goToDetail('pengumuman', item.id)"
-            >
+              @click="goToDetail('pengumuman', item.id)">
               <span class="kategori">{{ item.kategori }}</span>
               <h4 class="sub-card-title">{{ item.judulpengumuman }}</h4>
               <p class="sub-card-desc">{{ item.isipengumuman.substring(0, 80) }}...</p>
@@ -88,8 +85,7 @@
               class="sub-card"
               v-for="item in latestPenghargaan"
               :key="`penghargaan-${item.id}`"
-              @click="goToDetail('penghargaan', item.id)"
-            >
+              @click="goToDetail('penghargaan', item.id)">
               <span class="kategori">{{ item.kategori }}</span>
               <h4 class="sub-card-title">{{ item.judulpenghargaan }}</h4>
               <p class="sub-card-desc">{{ item.isipenghargaan.substring(0, 80) }}...</p>

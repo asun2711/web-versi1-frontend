@@ -36,8 +36,7 @@
           class="berita-card"
           v-for="berita in beritaList"
           :key="berita.id"
-          @click="() => goToDetail('berita', berita.id)"
-        >
+          @click="() => goToDetail('berita', berita.id)">
           <div class="meta-row">
             <span class="meta-item">🗓 {{ formatTanggal(berita.tanggalberita) }}</span>
             <span class="meta-item">👤 {{ berita.namauploader }}</span>
@@ -51,16 +50,14 @@
                 class="berita-img"
                 :src="berita.gambarberita ? `${API_URL}/uploads/berita/${berita.gambarberita}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="berita.judulberita"
-                loading="lazy"
-              />
+                loading="lazy"/>
               <p class="berita-desc">{{ berita.isiberita }}</p>
             </div>
 
             <div class="btn-wrapper">
               <button
                 class="btn-readmore"
-                @click.stop="() => goToDetail('berita', berita.id)"
-              >
+                @click.stop="() => goToDetail('berita', berita.id)">
                 Baca Selengkapnya
               </button>
             </div>
@@ -84,8 +81,7 @@
               class="sub-card"
               v-for="item in latestBerita"
               :key="`berita-${item.id}`"
-              @click="() => goToDetail('berita', item.id)"
-            >
+              @click="() => goToDetail('berita', item.id)">
               <span class="kategori">Berita</span>
               <h4 class="sub-card-title">{{ item.judulberita }}</h4>
               <p class="sub-card-desc">{{ truncateText(item.isiberita, 80) }}...</p>
@@ -96,8 +92,7 @@
               class="sub-card"
               v-for="item in latestPengumuman"
               :key="`pengumuman-${item.id}`"
-              @click="() => goToDetail('pengumuman', item.id)"
-            >
+              @click="() => goToDetail('pengumuman', item.id)">
               <span class="kategori">Pengumuman</span>
               <h4 class="sub-card-title">{{ item.judulpengumuman }}</h4>
               <p class="sub-card-desc">{{ truncateText(item.isipengumuman, 80) }}...</p>
@@ -108,8 +103,7 @@
               class="sub-card"
               v-for="item in latestPenghargaan"
               :key="`penghargaan-${item.id}`"
-              @click="() => goToDetail('penghargaan', item.id)"
-            >
+              @click="() => goToDetail('penghargaan', item.id)">
               <span class="kategori">Penghargaan</span>
               <h4 class="sub-card-title">{{ item.judulpenghargaan }}</h4>
               <p class="sub-card-desc">{{ truncateText(item.isipenghargaan, 80) }}...</p>

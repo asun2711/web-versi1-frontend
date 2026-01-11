@@ -7,24 +7,24 @@
         <textarea
           id="namakontensosial"
           v-model="form.namakontensosial"
-          placeholder="Contoh: Instagram"
-        ></textarea>
+          placeholder="Contoh: Instagram">
+        </textarea>
       </div>
       <div>
         <label for="kontenusername">Username Konten :</label>
         <textarea
           id="kontenusername"
           v-model="form.kontenusername"
-          placeholder="@asun_ranssee27"
-        ></textarea>
+          placeholder="@asun_ranssee27">
+        </textarea>
       </div>
       <div>
         <label for="isikonten">Konten Iframe :</label>
         <textarea
           id="isikonten"
           v-model="form.isikonten"
-          placeholder="<iframe ...></iframe>"
-        ></textarea>
+          placeholder="<iframe ...></iframe>">
+        </textarea>
       </div>
 
       <div class="action-buttons">
@@ -35,8 +35,7 @@
           v-if="isEditing"
           type="button"
           @click="cancelEdit"
-          class="btn-cancel"
-        >
+          class="btn-cancel">
           Batal
         </button>
       </div>

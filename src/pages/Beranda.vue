@@ -10,8 +10,7 @@
         alt="Slide Image"
         loading="lazy"
         :key="`slide-${currentSlide}`"
-        @error="handleImageError"
-      />
+        @error="handleImageError"/>
       <div class="hero-content">
         <h2>{{ activeSlide.judulslide }}</h2>
         <p>{{ activeSlide.isislide }}</p>
@@ -46,8 +45,7 @@
             @keyup.enter="goToCard(item)"
             tabindex="0"
             role="button"
-            :aria-label="`Buka halaman ${item.label}`"
-          >
+            :aria-label="`Buka halaman ${item.label}`">
             {{ item.label }}
           </div>
         </div>
@@ -62,8 +60,7 @@
         class="sejarah-img"
         alt="Sejarah RSUD Talang Ubi"
         loading="lazy"
-        @error="handleImageError"
-      />
+        @error="handleImageError"/>
       <h3 id="sejarah-title" class="title-justify">
         {{ sejarah?.judulsejarah ?? 'Sejarah RSUD Talang Ubi' }}
       </h3>
@@ -101,16 +98,14 @@
           @click="goToDetail('pengumuman', item.id)"
           @keyup.enter="goToDetail('pengumuman', item.id)"
           tabindex="0"
-          role="article"
-        >
+          role="article">
           <img
             v-if="item.gambarpengumuman"
             :src="getImageUrl('pengumuman', item.gambarpengumuman)"
             class="pengumuman-img"
             :alt="item.judulpengumuman || 'Gambar pengumuman'"
             loading="lazy"
-            @error="handleImageError"
-          />
+            @error="handleImageError"/>
           
           <p class="small-text">
             {{ formatTanggal(item.tanggalpengumuman) }}
@@ -127,8 +122,7 @@
           <button
             class="btn-detail"
             @click.stop="goToDetail('pengumuman', item.id)"
-            :aria-label="`Baca selengkapnya tentang ${item.judulpengumuman}`"
-          >
+            :aria-label="`Baca selengkapnya tentang ${item.judulpengumuman}`">
             Selengkapnya
           </button>
         </article>
@@ -148,16 +142,14 @@
           @click="goToDetail('penghargaan', item.id)"
           @keyup.enter="goToDetail('penghargaan', item.id)"
           tabindex="0"
-          role="article"
-        >
+          role="article">
           <img
             v-if="item.gambarpenghargaan"
             :src="getImageUrl('penghargaan', item.gambarpenghargaan)"
             class="penghargaan-img"
             :alt="item.judulpenghargaan || 'Gambar penghargaan'"
             loading="lazy"
-            @error="handleImageError"
-          />
+            @error="handleImageError"/>
 
           <p class="small-text">
             {{ formatTanggal(item.tanggalpenghargaan) }}
@@ -174,8 +166,7 @@
           <button
             class="btn-detail"
             @click.stop="goToDetail('penghargaan', item.id)"
-            :aria-label="`Baca selengkapnya tentang ${item.judulpenghargaan}`"
-          >
+            :aria-label="`Baca selengkapnya tentang ${item.judulpenghargaan}`">
             Selengkapnya
           </button>
         </article>

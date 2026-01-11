@@ -56,8 +56,7 @@
               type="text"
               v-model="nama"
               placeholder="Masukan nama lengkap"
-              required
-            />
+              required/>
             <input
               type="tel"
               v-model="telepon"
@@ -66,28 +65,25 @@
               pattern="[0-9]+"
               inputmode="numeric"
               title="Nomor telepon harus berisi angka saja"
-              class="input-style"
-            />
+              class="input-style"/>
           </div>
           <div class="row">
             <input
               type="email"
               v-model="email"
               placeholder="Masukan alamat email"
-              required
-            />
+              required/>
             <input
               type="text"
               v-model="subjek"
-              placeholder="Masukan subjek pesan"
-            />
+              placeholder="Masukan subjek pesan"/>
           </div>
           <textarea
             rows="4"
             v-model="pesan"
             placeholder="Tuliskan pesan Anda di sini..."
-            required
-          ></textarea>
+            required>
+          </textarea>
           <button type="submit">Kirim Pesan</button>
         </form>
       </div>

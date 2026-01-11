@@ -20,15 +20,13 @@
           class="dropdown"
           :class="{ 'dropdown-open': item?.open && isMobileView }"
           @mouseenter="!isMobileView && handleMouseEnter(key)"
-          @mouseleave="!isMobileView && handleMouseLeave(key)"
-        >
+          @mouseleave="!isMobileView && handleMouseLeave(key)">
           <span 
             class="dropdown-title"
             @click="isMobileView ? handleDropdownTitleClick(key, $event) : undefined"
             :tabindex="isMobileView ? 0 : -1"
             @keydown.enter="isMobileView ? handleDropdownTitleClick(key, $event) : undefined"
-            @keydown.space="isMobileView ? handleDropdownTitleClick(key, $event) : undefined"
-          >
+            @keydown.space="isMobileView ? handleDropdownTitleClick(key, $event) : undefined">
             {{ item?.label }}
             <span class="arrow" :class="{ open: item?.open }">▾</span>
           </span>
@@ -40,8 +38,7 @@
                   :to="sub.link" 
                   @click="closeMobileMenu"
                   @keydown.enter="closeMobileMenu"
-                  @keydown.space="closeMobileMenu"
-                >
+                  @keydown.space="closeMobileMenu">
                   {{ sub.name }}
                 </RouterLink>
               </li>

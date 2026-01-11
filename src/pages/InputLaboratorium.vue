@@ -51,8 +51,7 @@
               <img
                 v-if="item.gambarlaboratorium"
                 :src="`${API_URL}/uploads/laboratorium/${item.gambarlaboratorium}`"
-                alt="Gambar"
-              />
+                alt="Gambar"/>
             </td>
 
             <td class="aksi-cell">

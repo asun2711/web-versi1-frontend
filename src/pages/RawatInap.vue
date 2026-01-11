@@ -9,8 +9,7 @@
             :key="tab.name"
             :to="tab.link"
             class="tab-item"
-            :class="{ active: isActiveTab(tab.link) }"
-          >
+            :class="{ active: isActiveTab(tab.link) }">
             {{ tab.name }}
           </router-link>
         </div>
@@ -35,8 +34,7 @@
           class="pengumuman-card"
           v-for="item in rawatInapList"
           :key="item.id"
-          @click="goToDetail('rawatinap', item.id)"
-        >
+          @click="goToDetail('rawatinap', item.id)">
           <div class="meta-row">
             <span class="meta-item">🏥 Rawat Inap</span>
           </div>
@@ -50,16 +48,14 @@
                 :src="item.gambarrawatinap ? `${API_URL}/uploads/rawatinap/${item.gambarrawatinap}` : 'https://via.placeholder.com/150x150?text=No+Image'"
                 :alt="item.namarawatinap"
                 loading="lazy"
-                decoding="async"
-              />
+                decoding="async"/>
               <p class="pengumuman-desc">{{ item.isirawatinap }}</p>
             </div>
 
             <div class="btn-wrapper">
               <button
                 class="btn-readmore"
-                @click.stop="goToDetail('rawatinap', item.id)"
-              >
+                @click.stop="goToDetail('rawatinap', item.id)">
                 Baca Selengkapnya
               </button>
             </div>
@@ -83,8 +79,7 @@
               class="sub-card"
               v-for="item in latestRawatJalan"
               :key="`rj-${item.id}`"
-              @click="goToDetail('rawatjalan', item.id)"
-            >
+              @click="goToDetail('rawatjalan', item.id)">
               <span class="kategori">Rawat Jalan</span>
               <h4 class="sub-card-title">{{ item.namarawatjalan }}</h4>
               <p class="sub-card-desc">{{ (item.isirawatjalan || '').substring(0, 80) }}...</p>
@@ -95,8 +90,7 @@
               class="sub-card"
               v-for="item in latestRawatInap"
               :key="`ri-${item.id}`"
-              @click="goToDetail('rawatinap', item.id)"
-            >
+              @click="goToDetail('rawatinap', item.id)">
               <span class="kategori">Rawat Inap</span>
               <h4 class="sub-card-title">{{ item.namarawatinap }}</h4>
               <p class="sub-card-desc">{{ (item.isirawatinap || '').substring(0, 80) }}...</p>
@@ -107,8 +101,7 @@
               class="sub-card"
               v-for="item in latestIGD"
               :key="`igd-${item.id}`"
-              @click="goToDetail('igd', item.id)"
-            >
+              @click="goToDetail('igd', item.id)">
               <span class="kategori">IGD</span>
               <h4 class="sub-card-title">{{ item.namaigd }}</h4>
               <p class="sub-card-desc">{{ (item.isiigd || '').substring(0, 80) }}...</p>
