@@ -217,7 +217,7 @@ const crud = <T>(url: string, multipart = false) => {
 
 // ====================== API SERVICES ======================
 export const beritaApi = crud<Berita>('/api/databerita', true);
-export const contactApi = crud<Contact>('/api/datacontact', true);
+export const contactApi = crud<Contact>('/api/datacontact');
 export const dokterApi = crud<Dokter>('/api/datadokter', true);
 export const spesialisApi = crud<Spesialis>('/api/dataspesialis', true);
 export const igdApi = crud<Igd>('/api/dataigd', true);
