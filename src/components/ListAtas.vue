@@ -140,7 +140,7 @@ export default defineComponent({
 
 .topbar-right {
   margin-left: auto;
-  margin-right: -0.5rem;
+  margin-right: 1rem;
 }
 
 .topbar-text {
