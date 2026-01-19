@@ -1,10 +1,12 @@
 <template>
   <aside class="header">
     <nav class="nav container">
-      <h1 class="logo">
-        <img v-if="logoHeader" :src="logoHeader" alt="Logo" />
-        <span v-else class="logo-fallback">Logo</span>
-      </h1>
+    <h1 class="logo">
+      <img v-if="logoHeader" :src="logoHeader" alt="Logo" />
+      <span v-else class="logo-fallback">Logo</span>
+      <img style="width: 100%; height: 70px;" src="@/assets/images/SunWebTulis.png" alt="SunWeb Logo" />
+    </h1>
+
       
       <div class="mobile-toggle" @click="toggleMobileMenu" :aria-expanded="isMobileMenuOpen" aria-label="Toggle menu">
         <span class="bar"></span>

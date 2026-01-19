@@ -50,6 +50,7 @@
 
     <div class="footer-bottom">
       <p>© {{ year }} {{ perusahaan?.namaperusahaan || "Sun Web" }} — Support By Kak Asun. All rights reserved.</p>
+      <img style="width: 20%; height: 80px;" src="@/assets/images/SunWebTulis.png" alt="SunWeb Logo" />
     </div>
   </aside>
 </template>
