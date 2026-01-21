@@ -318,7 +318,6 @@ export default {
 
 .menu > li {
   position: relative;
-   right: 7rem;
 }
 
 .menu a {
@@ -407,7 +406,7 @@ export default {
   background: #ffffff;
   list-style: none;
   padding: 0.75rem 0;
-  min-width: 200px;
+  min-width: 20px;
   border-radius: 8px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   z-index: 100;
@@ -463,13 +462,19 @@ export default {
   .mobile-toggle {
     display: flex;
   }
+
+  .logo > img:last-child,
+  .logo img[src*="SunWebTulis"] {
+    width: 100% !important;
+    height: 50px !important;
+  }
   
   .menu {
     /* Menu muncul di kanan bawah toggle - POSISI ABSOLUT */
     position: absolute;
-    top: calc(100% + 5px); /* Sedikit di bawah toggle */
-    right: 1.5rem; /* Sejajar dengan toggle di kanan */
-    width: 260px; /* Lebar fixed, tidak full width */
+    top: calc(100% + 5px);
+    right: 1.5rem; 
+    width: 180px !important;  /* Lebar fixed, tidak full width */
     flex-direction: column;
     align-items: stretch;
     background: white;
