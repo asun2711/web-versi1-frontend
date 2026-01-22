@@ -564,14 +564,18 @@ export default {
 /* Hero section */
 .hero-card {
   position: relative;
-  min-height: min(550px, 70vh);
+  height: 500px; 
+  min-height: 400px; 
+  max-height: 450px; 
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 16/9;
+  margin: 0;
+  padding: 0;
+  contain: layout;
 }
 
 .hero-card::before {
